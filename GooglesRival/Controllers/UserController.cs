@@ -36,12 +36,10 @@ namespace GooglesRival.Controllers
         {
             if (Username == null || password == null)
                 return StatusCode(500);
-            if (names.Contains(Username) && password == "FooBar")
+            else if (names.Contains(Username) && password == "FooBar")
                 return Ok(true);
-            else if (names.Contains(Username) && password != "FooBar")
-                return Forbid();
             else
-                return BadRequest(false);
+                return Ok(false);
         }
 
 
@@ -75,12 +73,19 @@ namespace GooglesRival.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("ChangePassword")]
-        public bool ChangePassword(string username, string oldPassword, string newPassword, string newPasswordConfirmation)
+        public ActionResult<bool> ChangePassword(string username, string oldPassword, string newPassword, string newPasswordConfirmation)
         {
-            if (newPassword == newPasswordConfirmation)
-                return true;
-            else
-                return false;
+            if (username == null || oldPassword == null || newPassword == null || newPasswordConfirmation == null)
+                return StatusCode(500);
+            else if (newPassword != newPasswordConfirmation)
+                return BadRequest(false);
+            else if (oldPassword != "FooBar")
+                return Ok(false);
+            else if (!names.Contains(username))
+                return NotFound(false);
+            else if (names.Contains(username) && oldPassword == "FooBar")
+                return Ok(true);
+            return StatusCode(500);
         }
     }
 }
