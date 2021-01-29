@@ -1,4 +1,5 @@
 ﻿using GooglesRival.Models;
+using GooglesRival.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -14,22 +15,39 @@ namespace GooglesRival.Controllers
     {
         private readonly ILogger<MessageController> _logger;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MessageController"/> class.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
         public MessageController(ILogger<MessageController> logger)
         {
             _logger = logger;
         }
 
-        /*[HttpGet]
-        public IEnumerable<Message> Get()
+        /// <summary>
+        /// Gets the messages for user.
+        /// </summary>
+        /// <param name="username">The username.</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("GetMessagesForUser")]
+        public IEnumerable<Message> GetMessagesForUser(string username)
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new Message
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
-        }*/
+            var message = new MessageService();
+            return message.GetMessagesForUser(username);
+        }
+
+        /// <summary>
+        /// Gets the single message.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("GetMessageById")]
+        public ActionResult<Message> GetSingleMessage(string id)
+        {
+            var message = new MessageService();
+            return Ok(message.GetMessageById(id));
+        }
     }
 }
