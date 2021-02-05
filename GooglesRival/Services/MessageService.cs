@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace GooglesRival.Services
 {
-    public class MessageService
+    public class MessageService : IMessageService
     {
         /// <summary>
         /// The messages
         /// </summary>
-        public List<Message> messages;
+        private List<Message> messages = new List<Message>();
+
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageService"/> class.
@@ -19,9 +21,8 @@ namespace GooglesRival.Services
         public MessageService()
         {
             int uniqueMessageCount = 0;
-            messages = new List<Message>();
             ////Every user gets this one
-            for (int i = 0; i< 10;i++)
+            for (int i = 0; i < 10; i++)
             {
                 Message tempMessage = new Message();
                 tempMessage.Id = uniqueMessageCount;
@@ -56,6 +57,27 @@ namespace GooglesRival.Services
             lastMessage.Subject = "Fed up of memes?";
             lastMessage.body = "...Crickets...";
             messages.Add(lastMessage);
+        }
+
+        /// <summary>
+        /// Initialises the specified message.
+        /// </summary>
+        /// <param name="_message">The message.</param>
+        public MessageService(Message _message)
+        {
+            messages.Add(_message);
+        }
+
+        /// <summary>
+        /// Initialises the specified messages.
+        /// </summary>
+        /// <param name="_messages">The messages.</param>
+        public MessageService(List<Message> _messages)
+        {
+            foreach (var _message in _messages)
+            {
+                messages.Add(_message);
+            }
         }
 
         /// <summary>

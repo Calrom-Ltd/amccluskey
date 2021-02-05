@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GooglesRival.Models
 {
-    public class Users
+    public class User
     {
         /// <summary>
         /// Gets or sets the username.
