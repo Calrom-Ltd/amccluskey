@@ -98,7 +98,14 @@ namespace GooglesRival.Services
         public Message GetMessageById(string id)
         {
             int MessageId = int.Parse(id);
-            return messages.Single(msg => msg.Id.Equals(MessageId));
+            try
+            {
+                return messages.Single(msg => msg.Id.Equals(MessageId));
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
     }
 }
