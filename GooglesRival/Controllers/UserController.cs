@@ -1,5 +1,6 @@
 ﻿using GooglesRival.Models;
 using GooglesRival.Services;
+using GooglesRival.Services.Iservices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -15,9 +16,12 @@ namespace GooglesRival.Controllers
     {
         private readonly ILogger<UserController> _logger;
 
-        public UserController(ILogger<UserController> logger)
+        private readonly IUsersService usersService;
+
+        public UserController(ILogger<UserController> logger, IUsersService usersService)
         {
             _logger = logger;
+            this.usersService = usersService;
         }
         
         /// <summary>
@@ -30,7 +34,7 @@ namespace GooglesRival.Controllers
         [Route("Login")]
         public ActionResult<bool> Get(string Username, string password)
         {
-            return Ok(UsersService.VerifyUsernameAndPassword(Username, password));
+            return Ok(usersService.VerifyUsernameAndPassword(Username, password));
         }
 
 
@@ -42,7 +46,7 @@ namespace GooglesRival.Controllers
         [Route("DisplayUsers")]
         public List<User> GetAll()
         {
-            return UsersService.GetAllUsers();
+            return usersService.GetAllUsers();
         }
 
         /// <summary>
@@ -61,14 +65,14 @@ namespace GooglesRival.Controllers
             {
                 return StatusCode(500);
             }
-            return Ok(UsersService.ChangePassword(username, oldPassword, newPassword));
+            return Ok(usersService.ChangePassword(username, oldPassword, newPassword));
         }
 
         [HttpPut]
         [Route("AddNewUser")]
         public ActionResult<bool> AddNewUser(string username, string password)
         {
-            return Ok(UsersService.AddNewUser(username, password));
+            return Ok(usersService.AddNewUser(username, password));
         }
     }
 }

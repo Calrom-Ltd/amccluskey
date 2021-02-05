@@ -2,21 +2,22 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using GooglesRival.Services.Iservices;
 
 namespace GooglesRival.Services
 {
-    public static class UsersService
+    public class UsersService : IUsersService
     {
         /// <summary>
         /// The users
         /// </summary>
         private static List<User> users = new List<User>();
 
+
         /// <summary>
-        /// Initalises this instance.
+        /// Initializes a new instance of the <see cref="UsersService"/> class.
         /// </summary>
-        public static void initalise()
+        public UsersService()
         {
             //// This constructor adds a few default users to the service
             users.Add(new User()
@@ -36,20 +37,22 @@ namespace GooglesRival.Services
             });
         }
 
+
         /// <summary>
-        /// Initialises the specified user.
+        /// Initializes a new instance of the <see cref="UsersService"/> class.
         /// </summary>
         /// <param name="user">The user.</param>
-        public static void initialise(User user)
+        public UsersService(User user)
         {
             users.Add(user);
         }
 
+
         /// <summary>
-        /// Intialises the specified users.
+        /// Initializes a new instance of the <see cref="UsersService"/> class.
         /// </summary>
         /// <param name="_users">The users.</param>
-        public static void intialise(List<User> _users)
+        public UsersService(List<User> _users)
         {
             foreach (var _user in _users)
             {
@@ -61,7 +64,7 @@ namespace GooglesRival.Services
         /// Gets all users.
         /// </summary>
         /// <returns></returns>
-        public static List<User> GetAllUsers()
+        public List<User> GetAllUsers()
         {
             ////The most basic - populate a list of users, and return the result, all have the same password
             return users;
@@ -78,7 +81,7 @@ namespace GooglesRival.Services
         /// or
         /// password
         /// </exception>
-        public static bool VerifyUsernameAndPassword(string username, string password)
+        public bool VerifyUsernameAndPassword(string username, string password)
         {
             if (username == null)
                 throw new ArgumentNullException(nameof(username));
@@ -97,7 +100,7 @@ namespace GooglesRival.Services
         /// <param name="oldPassword">The old password.</param>
         /// <param name="newPassword">The new password.</param>
         /// <returns></returns>
-        public static bool ChangePassword(string username, string oldPassword, string newPassword)
+        public bool ChangePassword(string username, string oldPassword, string newPassword)
         {
             foreach (var user in users)
             {
@@ -115,7 +118,7 @@ namespace GooglesRival.Services
         /// </summary>
         /// <param name="username">The username.</param>
         /// <returns></returns>
-        private static bool DoesUserExist(string username)
+        private bool DoesUserExist(string username)
         {
             return (users.Any(x => x.Username == username));
         }
@@ -126,7 +129,7 @@ namespace GooglesRival.Services
         /// <param name="username">The username.</param>
         /// <param name="password">The password.</param>
         /// <returns></returns>
-        public static bool AddNewUser(string username, string password)
+        public bool AddNewUser(string username, string password)
         {
             if (!DoesUserExist(username))
             {
