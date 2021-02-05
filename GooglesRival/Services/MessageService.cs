@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace GooglesRival.Services
 {
-    public class MessageService
+    public static class MessageService
     {
         /// <summary>
         /// The messages
         /// </summary>
-        public List<Message> messages;
+        private static List<Message> messages = new List<Message>();
+
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MessageService"/> class.
+        /// Initialises this instance.
         /// </summary>
-        public MessageService()
+        public static void initialise()
         {
             int uniqueMessageCount = 0;
-            messages = new List<Message>();
             ////Every user gets this one
             for (int i = 0; i< 10;i++)
             {
@@ -59,11 +59,32 @@ namespace GooglesRival.Services
         }
 
         /// <summary>
+        /// Initialises the specified message.
+        /// </summary>
+        /// <param name="_message">The message.</param>
+        public static void initialise(Message _message)
+        {
+            messages.Add(_message);
+        }
+
+        /// <summary>
+        /// Initialises the specified messages.
+        /// </summary>
+        /// <param name="_messages">The messages.</param>
+        public static void initialise(List<Message> _messages)
+        {
+            foreach (var _message in _messages)
+            {
+                messages.Add(_message);
+            }
+        }
+
+        /// <summary>
         /// Gets the messages for user.
         /// </summary>
         /// <param name="username">The username.</param>
         /// <returns></returns>
-        public List<Message> GetMessagesForUser(string username)
+        public static List<Message> GetMessagesForUser(string username)
         {
             return messages.Where(msg => msg.Username.Equals(username)).ToList();
         }
@@ -73,7 +94,7 @@ namespace GooglesRival.Services
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        public Message GetMessageById(string id)
+        public static Message GetMessageById(string id)
         {
             int MessageId = int.Parse(id);
             return messages.Single(msg => msg.Id.Equals(MessageId));

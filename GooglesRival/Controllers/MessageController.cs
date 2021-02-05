@@ -33,8 +33,7 @@ namespace GooglesRival.Controllers
         [Route("GetMessagesForUser")]
         public IEnumerable<Message> GetMessagesForUser(string username)
         {
-            var message = new MessageService();
-            return message.GetMessagesForUser(username);
+            return MessageService.GetMessagesForUser(username);
         }
 
         /// <summary>
@@ -46,8 +45,7 @@ namespace GooglesRival.Controllers
         [Route("GetMessageById")]
         public ActionResult<Message> GetSingleMessage(string id)
         {
-            var message = new MessageService();
-            return Ok(message.GetMessageById(id));
+            return Ok(MessageService.GetMessageById(id));
         }
     }
 }

@@ -1,3 +1,4 @@
+using GooglesRival.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -13,6 +14,8 @@ namespace GooglesRival
     {
         public static void Main(string[] args)
         {
+            UsersService.initalise();
+            MessageService.initialise();
             CreateHostBuilder(args).Build().Run();
         }
 
