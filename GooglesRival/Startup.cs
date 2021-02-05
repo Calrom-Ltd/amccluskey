@@ -29,6 +29,7 @@ namespace GooglesRival
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IUsersService, UsersService>();
+            services.AddSingleton<IMessageService, MessageService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

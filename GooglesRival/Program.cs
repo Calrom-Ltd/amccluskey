@@ -14,7 +14,6 @@ namespace GooglesRival
     {
         public static void Main(string[] args)
         {
-            MessageService.initialise();
             CreateHostBuilder(args).Build().Run();
         }
 
