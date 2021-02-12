@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+    googlesrival:
+        build: 
+            context: .
+            dockerfile: GooglesRival/Dockerfile
+        environment: 
+            - DEBUG
+        image: test
+        restart: on-failure
+        ports:
+              - 8123:80
+        container_name: googles_rival_ContainerName
+networks:
+    default:
+        name: google_default
