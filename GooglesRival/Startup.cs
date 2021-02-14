@@ -45,7 +45,7 @@ namespace GooglesRival
             app.UseDeveloperExceptionPage();
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GooglesRival v1"));
-            app.UseWelcomePage();
+            ////app.UseWelcomePage();
 #else
             ////If the release config is not debug, but the development flag is set in the system variables
             if (env.IsDevelopment())
