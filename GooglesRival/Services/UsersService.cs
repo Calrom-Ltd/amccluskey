@@ -73,11 +73,7 @@ namespace GooglesRival.Services
             {
                 if (user.Username == username && user.Password == oldPassword)
                 {
-                    return dataSource.UpdateUser(new User()
-                    {
-                        Username = username,
-                        Password = newPassword,
-                    });
+                    return dataSource.UpdateUser(username, newPassword);
                 }
             }
             return false;
@@ -90,8 +86,15 @@ namespace GooglesRival.Services
         /// <returns></returns>
         private bool DoesUserExist(string username)
         {
-            var users = this.dataSource.GetUsers();
-            return (users.Any(x => x.Username == username));
+            try
+            {
+                var users = this.dataSource.GetUsers();
+                return (users.Any(x => x.Username == username));
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -104,11 +107,8 @@ namespace GooglesRival.Services
         {
             if (!DoesUserExist(username))
             {
-                return this.dataSource.AddUser(new User()
-                {
-                    Username = username,
-                    Password = password,
-                });
+                var output = this.dataSource.AddUser(username, password);
+                return output;
             }
             else
                 return false;

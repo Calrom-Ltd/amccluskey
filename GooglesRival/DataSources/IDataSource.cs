@@ -16,13 +16,13 @@ namespace GooglesRival.Controllers
         /// </summary>
         /// <param name="theUser">The user.</param>
         /// <returns></returns>
-        bool UpdateUser(User theUser);
+        bool UpdateUser(string username, string password);
 
         /// <summary>
         /// Adds the user.
         /// </summary>
         /// <param name="theUser">The user.</param>
         /// <returns></returns>
-        bool AddUser(User theUser);
+        bool AddUser(string username, string password);
     }
 }

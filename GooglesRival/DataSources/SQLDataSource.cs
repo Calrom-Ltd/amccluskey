@@ -61,12 +61,12 @@ namespace GooglesRival.Controllers
         /// </summary>
         /// <param name="theUser">The user.</param>
         /// <returns></returns>
-        public bool UpdateUser(User theUser)
+        public bool UpdateUser(string username, string password)
         {
             SqlCommand command = connection.CreateCommand();
             command.CommandText= "UPDATE MyAPI_Users SET MyAPI_Users_Password = @Password WHERE MyAPI_Users_Username = @Username";
-            command.Parameters.AddWithValue("@Password", theUser.Password);
-            command.Parameters.AddWithValue("@Username", theUser.Username);
+            command.Parameters.AddWithValue("@Password", password);
+            command.Parameters.AddWithValue("@Username", username);
             try
             {
                 command.ExecuteNonQuery();
@@ -84,13 +84,13 @@ namespace GooglesRival.Controllers
         /// </summary>
         /// <param name="theUser">The user.</param>
         /// <returns></returns>
-        public bool AddUser(User theUser)
+        public bool AddUser(string username, string password)
         {
             SqlCommand command = connection.CreateCommand();
             command.CommandText = "INSERT into MyAPI_Users (MyAPI_Users_Username, MyAPI_Users_Password) VALUES " +
                 "(@Username, @Password)";
-            command.Parameters.AddWithValue("@Username", theUser.Username);
-            command.Parameters.AddWithValue("@Password", theUser.Password);
+            command.Parameters.AddWithValue("@Username", username);
+            command.Parameters.AddWithValue("@Password", password);
             try
             {
                 command.ExecuteNonQuery();
