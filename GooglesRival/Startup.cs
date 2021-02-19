@@ -40,13 +40,6 @@ namespace GooglesRival
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-#if DEBUG
-////if the release config is debug
-            app.UseDeveloperExceptionPage();
-            app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GooglesRival v1"));
-            ////app.UseWelcomePage();
-#else
             ////If the release config is not debug, but the development flag is set in the system variables
             if (env.IsDevelopment())
             { 
@@ -54,7 +47,6 @@ namespace GooglesRival
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GooglesRival v1"));
             }
-#endif
 
             ////app.UseHttpsRedirection();
 
