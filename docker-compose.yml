@@ -5,7 +5,7 @@ services:
             context: .
             dockerfile: GooglesRival/Dockerfile
         environment: 
-            - DEBUG
+            ASPNETCORE_ENVIRONMENT: Development
         image: test
         restart: on-failure
         ports:
