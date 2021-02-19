@@ -10,18 +10,12 @@ namespace GooglesRival.Services
     public class UsersService : IUsersService
     {
         /// <summary>
-        /// The users
-        /// </summary>
-        private List<User> users = new List<User>();
-
-        /// <summary>
         /// The data source
         /// </summary>
         private readonly IDataSource dataSource;
 
         public UsersService()
         {
-
         }
 
         /// <summary>
@@ -29,8 +23,7 @@ namespace GooglesRival.Services
         /// </summary>
         public UsersService(IDataSource dataSource)
         {
-            var SQL = new Controllers.SQLDataSource();
-            users = SQL.GetUsers();
+            this.dataSource = dataSource;
         }
 
 
@@ -40,7 +33,8 @@ namespace GooglesRival.Services
         /// <param name="user">The user.</param>
         public UsersService(User user)
         {
-            users.Add(user);
+            ////TODO
+            ////users.Add(user);
         }
 
 
@@ -50,10 +44,11 @@ namespace GooglesRival.Services
         /// <param name="_users">The users.</param>
         public UsersService(List<User> _users)
         {
-            foreach (var _user in _users)
-            {
-                users.Add(_user);
-            }
+            ////TODO
+            ////foreach (var _user in _users)
+            ////{
+            ////    users.Add(_user);
+            ////}
         }
 
         /// <summary>
@@ -62,8 +57,7 @@ namespace GooglesRival.Services
         /// <returns></returns>
         public List<User> GetAllUsers()
         {
-            ////The most basic - populate a list of users, and return the result, all have the same password
-            return users;
+            return this.dataSource.GetUsers();
         }
 
         /// <summary>
@@ -79,6 +73,7 @@ namespace GooglesRival.Services
         /// </exception>
         public bool VerifyUsernameAndPassword(string username, string password)
         {
+            var users = this.dataSource.GetUsers();
             if (username == null)
                 throw new ArgumentNullException(nameof(username));
             else if (password == null)
@@ -98,12 +93,16 @@ namespace GooglesRival.Services
         /// <returns></returns>
         public bool ChangePassword(string username, string oldPassword, string newPassword)
         {
+            var users = this.dataSource.GetUsers();
             foreach (var user in users)
             {
                 if (user.Username == username && user.Password == oldPassword)
                 {
-                    user.Password = newPassword;
-                    return true;
+                    return dataSource.UpdateUser(new User()
+                    {
+                        Username = username,
+                        Password = newPassword,
+                    });
                 }
             }
             return false;
@@ -116,6 +115,7 @@ namespace GooglesRival.Services
         /// <returns></returns>
         private bool DoesUserExist(string username)
         {
+            var users = this.dataSource.GetUsers();
             return (users.Any(x => x.Username == username));
         }
 
@@ -129,12 +129,11 @@ namespace GooglesRival.Services
         {
             if (!DoesUserExist(username))
             {
-                users.Add(new User()
+                return this.dataSource.AddUser(new User()
                 {
                     Username = username,
                     Password = password,
                 });
-                return true;
             }
             else
                 return false;
