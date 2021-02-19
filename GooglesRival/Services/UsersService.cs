@@ -26,31 +26,6 @@ namespace GooglesRival.Services
             this.dataSource = dataSource;
         }
 
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UsersService"/> class.
-        /// </summary>
-        /// <param name="user">The user.</param>
-        public UsersService(User user)
-        {
-            ////TODO
-            ////users.Add(user);
-        }
-
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UsersService"/> class.
-        /// </summary>
-        /// <param name="_users">The users.</param>
-        public UsersService(List<User> _users)
-        {
-            ////TODO
-            ////foreach (var _user in _users)
-            ////{
-            ////    users.Add(_user);
-            ////}
-        }
-
         /// <summary>
         /// Gets all users.
         /// </summary>
