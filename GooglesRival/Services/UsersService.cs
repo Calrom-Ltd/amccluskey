@@ -3,61 +3,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using GooglesRival.Services.Iservices;
+using GooglesRival.Controllers;
 
 namespace GooglesRival.Services
 {
     public class UsersService : IUsersService
     {
         /// <summary>
-        /// The users
+        /// The data source
         /// </summary>
-        private static List<User> users = new List<User>();
+        private readonly IDataSource dataSource;
 
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UsersService"/> class.
-        /// </summary>
         public UsersService()
         {
-            //// This constructor adds a few default users to the service
-            users.Add(new User()
-            {
-                Username = "Admin",
-                Password = "Password123",
-            });
-            users.Add(new User()
-            {
-                Username = "PapaJeff",
-                Password = "HanzoMain",
-            });
-            users.Add(new User()
-            {
-                Username = "Fortnite",
-                Password = "POGGERS",
-            });
         }
-
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UsersService"/> class.
         /// </summary>
-        /// <param name="user">The user.</param>
-        public UsersService(User user)
+        public UsersService(IDataSource dataSource)
         {
-            users.Add(user);
-        }
-
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UsersService"/> class.
-        /// </summary>
-        /// <param name="_users">The users.</param>
-        public UsersService(List<User> _users)
-        {
-            foreach (var _user in _users)
-            {
-                users.Add(_user);
-            }
+            this.dataSource = dataSource;
         }
 
         /// <summary>
@@ -66,8 +32,7 @@ namespace GooglesRival.Services
         /// <returns></returns>
         public List<User> GetAllUsers()
         {
-            ////The most basic - populate a list of users, and return the result, all have the same password
-            return users;
+            return this.dataSource.GetUsers();
         }
 
         /// <summary>
@@ -83,6 +48,7 @@ namespace GooglesRival.Services
         /// </exception>
         public bool VerifyUsernameAndPassword(string username, string password)
         {
+            var users = this.dataSource.GetUsers();
             if (username == null)
                 throw new ArgumentNullException(nameof(username));
             else if (password == null)
@@ -102,12 +68,12 @@ namespace GooglesRival.Services
         /// <returns></returns>
         public bool ChangePassword(string username, string oldPassword, string newPassword)
         {
+            var users = this.dataSource.GetUsers();
             foreach (var user in users)
             {
                 if (user.Username == username && user.Password == oldPassword)
                 {
-                    user.Password = newPassword;
-                    return true;
+                    return dataSource.UpdateUser(username, newPassword);
                 }
             }
             return false;
@@ -120,7 +86,15 @@ namespace GooglesRival.Services
         /// <returns></returns>
         private bool DoesUserExist(string username)
         {
-            return (users.Any(x => x.Username == username));
+            try
+            {
+                var users = this.dataSource.GetUsers();
+                return (users.Any(x => x.Username == username));
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -133,12 +107,8 @@ namespace GooglesRival.Services
         {
             if (!DoesUserExist(username))
             {
-                users.Add(new User()
-                {
-                    Username = username,
-                    Password = password,
-                });
-                return true;
+                var output = this.dataSource.AddUser(username, password);
+                return output;
             }
             else
                 return false;
