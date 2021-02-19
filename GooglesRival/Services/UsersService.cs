@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using GooglesRival.Services.Iservices;
+using GooglesRival.Controllers;
 
 namespace GooglesRival.Services
 {
@@ -11,30 +12,25 @@ namespace GooglesRival.Services
         /// <summary>
         /// The users
         /// </summary>
-        private static List<User> users = new List<User>();
+        private List<User> users = new List<User>();
 
+        /// <summary>
+        /// The data source
+        /// </summary>
+        private readonly IDataSource dataSource;
+
+        public UsersService()
+        {
+
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UsersService"/> class.
         /// </summary>
-        public UsersService()
+        public UsersService(IDataSource dataSource)
         {
-            //// This constructor adds a few default users to the service
-            users.Add(new User()
-            {
-                Username = "Admin",
-                Password = "Password123",
-            });
-            users.Add(new User()
-            {
-                Username = "PapaJeff",
-                Password = "HanzoMain",
-            });
-            users.Add(new User()
-            {
-                Username = "Fortnite",
-                Password = "POGGERS",
-            });
+            var SQL = new Controllers.SQLDataSource();
+            users = SQL.GetUsers();
         }
 
 

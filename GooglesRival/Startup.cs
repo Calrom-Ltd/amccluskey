@@ -13,6 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GooglesRival.Services;
 using GooglesRival.Services.Iservices;
+using GooglesRival.Controllers;
 
 namespace GooglesRival
 {
@@ -30,6 +31,7 @@ namespace GooglesRival
         {
             services.AddSingleton<IUsersService, UsersService>();
             services.AddSingleton<IMessageService, MessageService>();
+            services.AddSingleton<IDataSource, SQLDataSource>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
