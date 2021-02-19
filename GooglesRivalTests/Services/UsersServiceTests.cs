@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GooglesRival.Controllers;
 
 namespace GooglesRival.Services.Tests
 {
@@ -15,21 +16,23 @@ namespace GooglesRival.Services.Tests
         public void GetAllUsersTest()
         {
             //// Setup
-            var service = new UsersService();
+            IDataSource dataSource = new SQLDataSource();
+            var service = new UsersService(dataSource);
 
             //// Act
             var sut  = service.GetAllUsers();
 
             ////Assert
             Assert.IsNotNull(sut);
-            Assert.AreEqual(3, sut.Count);
+            Assert.AreNotEqual(0, sut.Count);
         }
 
         [TestMethod()]
         public void VerifyCorrectUsernameAndPassword()
         {
             //// Setup
-            var service = new UsersService();
+            IDataSource dataSource = new SQLDataSource();
+            var service = new UsersService(dataSource);
 
             //// Act
             var sut = service.VerifyUsernameAndPassword("PapaJeff","HanzoMain");
@@ -43,7 +46,8 @@ namespace GooglesRival.Services.Tests
         public void VerifyIncorrectUsername()
         {
             //// Setup
-            var service = new UsersService();
+            IDataSource dataSource = new SQLDataSource();
+            var service = new UsersService(dataSource);
 
             //// Act
             var sut = service.VerifyUsernameAndPassword("Dr.Fake News", "HanzoMain");
@@ -57,7 +61,8 @@ namespace GooglesRival.Services.Tests
         public void VerifyCorrectUsernameIncorrectPassword()
         {
             //// Setup
-            var service = new UsersService();
+            IDataSource dataSource = new SQLDataSource();
+            var service = new UsersService(dataSource);
 
             //// Act
             var sut = service.VerifyUsernameAndPassword("PapaJeff", "TheWorng");
@@ -85,7 +90,8 @@ namespace GooglesRival.Services.Tests
         public void VerifyAddingANewUserFailsWhenUserAlreadyExists()
         {
             //// Setup
-            var service = new UsersService();
+            IDataSource dataSource = new SQLDataSource();
+            var service = new UsersService(dataSource);
 
             //// Act
             var sut = service.AddNewUser("PapaJeff", "Ohnonono");
@@ -158,7 +164,8 @@ namespace GooglesRival.Services.Tests
         public void VerifyChangePasswordFailsWhenUserDoesntExist()
         {
             //// Setup
-            var service = new UsersService();
+            IDataSource dataSource = new SQLDataSource();
+            var service = new UsersService(dataSource);
 
             //// Act
             var sut = service.ChangePassword("Misingo", "HanzoMain", "Ohnonono");
