@@ -92,6 +92,7 @@ namespace GooglesRival.Services
         /// <returns></returns>
         public List<Message> GetMessagesForUser(string username)
         {
+            var messages = dataSource.GetMessages();
             return messages.Where(msg => msg.Username.Equals(username)).ToList();
         }
 

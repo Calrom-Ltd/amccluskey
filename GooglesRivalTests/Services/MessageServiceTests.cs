@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GooglesRival.Services;
 using GooglesRival.Models;
 using System;
+using GooglesRival.Controllers;
 
 namespace GooglesRivalTests
 {
@@ -14,16 +15,18 @@ namespace GooglesRivalTests
         public void VerifyMessagesDetailsCorrect()
         {
             //// Setup
-            var messageService = new MessageService();
+            IDataSource dataSource = new SQLDataSource();
+            var messageService = new MessageService(dataSource);
             Message message = new Message()
             {
-                Username = "User0",
-                Date = DateTime.Now,
-                Subject = "Hey Kids, have you heard of Rick rolling?",
-                body = "Haha Press F to Pay respects :-P",
+                Id = 1,
+                Username = "Admin",
+                Date = DateTime.Parse("01-01-2021"),
+                Subject = "Test",
+                body = "Testing that this works",
             };
             //// Act
-            var sut = messageService.GetMessageById("0");
+            var sut = messageService.GetMessageById("1");
 
             //// Assert
             Assert.IsNotNull(sut);
@@ -31,6 +34,7 @@ namespace GooglesRivalTests
             Assert.AreEqual(message.Username, sut.Username);
             Assert.AreEqual(message.Subject, sut.Subject);
             Assert.AreEqual(message.body, sut.body);
+            Assert.AreEqual(message.Date, sut.Date);
         }
 
         /// <summary>
@@ -41,24 +45,27 @@ namespace GooglesRivalTests
         public void VerifyMessageIsReturnedForValidUsername()
         {
             //// Setup
-            var messageService = new MessageService();
+            IDataSource dataSource = new SQLDataSource();
+            var messageService = new MessageService(dataSource);
             Message message = new Message()
             {
-                Username = "User0",
-                Date = DateTime.Now,
-                Subject = "Hey Kids, have you heard of Rick rolling?",
-                body = "Haha Press F to Pay respects :-P",
+                Id = 1,
+                Username = "Admin",
+                Date = DateTime.Parse("01-01-2021"),
+                Subject = "Test",
+                body = "Testing that this works",
             };
             //// Act
-            var sut = messageService.GetMessagesForUser("User0");
+            var sut = messageService.GetMessagesForUser("Admin");
 
             //// Assert
             Assert.IsNotNull(sut);
-            Assert.AreEqual(2, sut.Count);
+            Assert.AreEqual(1, sut.Count);
             Assert.AreEqual(message.Id, sut[0].Id);
             Assert.AreEqual(message.Username, sut[0].Username);
             Assert.AreEqual(message.Subject, sut[0].Subject);
             Assert.AreEqual(message.body, sut[0].body);
+            Assert.AreEqual(message.Date, sut[0].Date);
         }
 
         [TestMethod]
@@ -66,7 +73,8 @@ namespace GooglesRivalTests
         public void VerifyNoMessageIsReturnedForInValidUsername()
         {
             //// Setup
-            var messageService = new MessageService();
+            IDataSource dataSource = new SQLDataSource();
+            var messageService = new MessageService(dataSource);
 
             //// Act
             var sut = messageService.GetMessagesForUser("FakeUserName");
@@ -81,7 +89,8 @@ namespace GooglesRivalTests
         public void VerifyNoMessageIsReturnedForInValidMessageID()
         {
             //// Setup
-            var messageService = new MessageService();
+            IDataSource dataSource = new SQLDataSource();
+            var messageService = new MessageService(dataSource);
 
             //// Act
             var sut = messageService.GetMessageById("-1");
