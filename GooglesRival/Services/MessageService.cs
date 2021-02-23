@@ -1,4 +1,5 @@
-﻿using GooglesRival.Models;
+﻿using GooglesRival.Controllers;
+using GooglesRival.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,50 +14,54 @@ namespace GooglesRival.Services
         /// </summary>
         private List<Message> messages = new List<Message>();
 
-
+        /// <summary>
+        /// The data source
+        /// </summary>
+        private readonly IDataSource dataSource;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageService"/> class.
         /// </summary>
-        public MessageService()
+        public MessageService(IDataSource dataSource)
         {
-            int uniqueMessageCount = 0;
-            ////Every user gets this one
-            for (int i = 0; i < 10; i++)
-            {
-                Message tempMessage = new Message();
-                tempMessage.Id = uniqueMessageCount;
-                uniqueMessageCount++;
-                tempMessage.Username = $"User{i}";
-                tempMessage.Date = DateTime.Now;
-                tempMessage.Subject = "Hey Kids, have you heard of Rick rolling?";
-                tempMessage.body = "Haha Press F to Pay respects :-P";
-                messages.Add(tempMessage);
-            }
+            this.dataSource = dataSource;
+            ////int uniqueMessageCount = 0;
+            ////////Every user gets this one
+            ////for (int i = 0; i < 10; i++)
+            ////{
+            ////    Message tempMessage = new Message();
+            ////    tempMessage.Id = uniqueMessageCount;
+            ////    uniqueMessageCount++;
+            ////    tempMessage.Username = $"User{i}";
+            ////    tempMessage.Date = DateTime.Now;
+            ////    tempMessage.Subject = "Hey Kids, have you heard of Rick rolling?";
+            ////    tempMessage.body = "Haha Press F to Pay respects :-P";
+            ////    messages.Add(tempMessage);
+            ////}
 
-            ////Every other user gets this one
-            for (int i = 0; i < 10; i++)
-            {
-                Message tempMessage = new Message();
-                tempMessage.Id = uniqueMessageCount;
-                uniqueMessageCount++;
-                tempMessage.Username = $"User{i}";
-                tempMessage.Date = DateTime.Now;
-                tempMessage.Subject = "Hey Steam?";
-                tempMessage.body = "Nobody: ... Fry: Shut up and take my money";
-                messages.Add(tempMessage);
-                i++;
-            }
+            ////////Every other user gets this one
+            ////for (int i = 0; i < 10; i++)
+            ////{
+            ////    Message tempMessage = new Message();
+            ////    tempMessage.Id = uniqueMessageCount;
+            ////    uniqueMessageCount++;
+            ////    tempMessage.Username = $"User{i}";
+            ////    tempMessage.Date = DateTime.Now;
+            ////    tempMessage.Subject = "Hey Steam?";
+            ////    tempMessage.body = "Nobody: ... Fry: Shut up and take my money";
+            ////    messages.Add(tempMessage);
+            ////    i++;
+            ////}
 
-            ////The Last user gets this one
-            Message lastMessage = new Message();
-            lastMessage.Id = uniqueMessageCount;
-            uniqueMessageCount++;
-            lastMessage.Username = $"User10";
-            lastMessage.Date = DateTime.Now;
-            lastMessage.Subject = "Fed up of memes?";
-            lastMessage.body = "...Crickets...";
-            messages.Add(lastMessage);
+            ////////The Last user gets this one
+            ////Message lastMessage = new Message();
+            ////lastMessage.Id = uniqueMessageCount;
+            ////uniqueMessageCount++;
+            ////lastMessage.Username = $"User10";
+            ////lastMessage.Date = DateTime.Now;
+            ////lastMessage.Subject = "Fed up of memes?";
+            ////lastMessage.body = "...Crickets...";
+            ////messages.Add(lastMessage);
         }
 
         /// <summary>
@@ -87,6 +92,7 @@ namespace GooglesRival.Services
         /// <returns></returns>
         public List<Message> GetMessagesForUser(string username)
         {
+            var messages = dataSource.GetMessages();
             return messages.Where(msg => msg.Username.Equals(username)).ToList();
         }
 
@@ -100,7 +106,8 @@ namespace GooglesRival.Services
             int MessageId = int.Parse(id);
             try
             {
-                return messages.Single(msg => msg.Id.Equals(MessageId));
+                var output = dataSource.GetMessages().Single(msg => msg.Id.Equals(MessageId));
+                return output;
             }
             catch (Exception e)
             {

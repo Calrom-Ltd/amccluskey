@@ -24,5 +24,11 @@ namespace GooglesRival.Controllers
         /// <param name="theUser">The user.</param>
         /// <returns></returns>
         bool AddUser(string username, string password);
+
+        /// <summary>
+        /// Gets the Messages
+        /// </summary>
+        /// <returns></returns>
+        List<Message> GetMessages();
     }
 }
