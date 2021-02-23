@@ -103,6 +103,7 @@ namespace GooglesRival.Controllers
             }
         }
 
+
         public List<Message> GetMessages()
         {
             string query = "SELECT * FROM MyAPI_Messages INNER JOIN MyAPI_Users ON MyAPI_Messages.MyAPI_Messages_UserID = MyAPI_Users.MyAPI_Users_ID";
