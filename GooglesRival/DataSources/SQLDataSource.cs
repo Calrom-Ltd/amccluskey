@@ -102,5 +102,27 @@ namespace GooglesRival.Controllers
                 return false;
             }
         }
+
+        public List<Message> GetMessages()
+        {
+            string query = "SELECT * FROM MyAPI_Messages INNER JOIN MyAPI_Users ON MyAPI_Messages.MyAPI_Messages_UserID = MyAPI_Users.MyAPI_Users_ID";
+            SqlCommand cmd = new SqlCommand(query, connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            var output = new List<Message>();
+            while (reader.Read())
+            {
+                output.Add(new Message()
+                {
+                    Id = reader.GetInt32("MyAPI_Messages_ID"),
+                    Username = reader.GetString("MyAPI_Users_Username"),
+                    Date = reader.GetDateTime("MyAPI_Messages_Date"),
+                    Subject = reader.GetString("MyAPI_Messages_Subject"),
+                    body = reader.GetString("MyAPI_Messages_Body"),
+                });
+            }
+            reader.Close();
+            return output;
+        }
     }
 }
