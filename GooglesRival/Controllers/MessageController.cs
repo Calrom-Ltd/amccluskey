@@ -1,17 +1,16 @@
-﻿using GooglesRival.Models;
-using GooglesRival.Services;
-using GooglesRival.Services.Iservices;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿// <copyright file="MessageController.cs" company="Adam's Awesome API">
+// Copyright (c) Adam's Awesome API. All rights reserved.
+// </copyright>
 
 namespace GooglesRival.Controllers
 {
+    using System.Collections.Generic;
+    using GooglesRival.Models;
+    using GooglesRival.Services;
+    using Microsoft.AspNetCore.Mvc;
+
     /// <summary>
-    /// 
+    /// Message Controller.
     /// </summary>
     /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
     [ApiController]
@@ -19,22 +18,16 @@ namespace GooglesRival.Controllers
     public class MessageController : ControllerBase
     {
         /// <summary>
-        /// The logger
-        /// </summary>
-        private readonly ILogger<MessageController> _logger;
-
-        /// <summary>
-        /// The message service
+        /// The message service.
         /// </summary>
         private readonly IMessageService messageService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MessageController"/> class.
+        /// Initializes a new instance of the <see cref="MessageController" /> class.
         /// </summary>
-        /// <param name="logger">The logger.</param>
-        public MessageController(ILogger<MessageController> logger, IMessageService messageService)
+        /// <param name="messageService">The message service.</param>
+        public MessageController(IMessageService messageService)
         {
-            _logger = logger;
             this.messageService = messageService;
         }
 
@@ -42,24 +35,24 @@ namespace GooglesRival.Controllers
         /// Gets the messages for user.
         /// </summary>
         /// <param name="username">The username.</param>
-        /// <returns></returns>
+        /// <returns>The Object.</returns>
         [HttpGet]
         [Route("GetMessagesForUser")]
         public IEnumerable<Message> GetMessagesForUser(string username)
         {
-            return messageService.GetMessagesForUser(username);
+            return this.messageService.GetMessagesForUser(username);
         }
 
         /// <summary>
         /// Gets the single message.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>The Object.</returns>
         [HttpGet]
         [Route("GetMessageById")]
         public ActionResult<Message> GetSingleMessage(string id)
         {
-            return Ok(messageService.GetMessageById(id));
+            return this.Ok(this.messageService.GetMessageById(id));
         }
     }
 }

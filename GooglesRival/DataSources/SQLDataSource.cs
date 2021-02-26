@@ -1,46 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
-using GooglesRival.Models;
-using System.Data;
+﻿// <copyright file="SqlDataSource.cs" company="Adam's Awesome API">
+// Copyright (c) Adam's Awesome API. All rights reserved.
+// </copyright>
 
 namespace GooglesRival.Controllers
 {
-    public class SQLDataSource : IDataSource
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Data.SqlClient;
+    using GooglesRival.Models;
+
+    /// <summary>
+    /// SQL Data Source.
+    /// </summary>
+    /// <seealso cref="GooglesRival.Controllers.IDataSource" />
+    public class SqlDataSource : IDataSource
     {
         private readonly string server = "localhost\\SQLEXPRESS";
         private readonly string database = "MyAPI";
         private readonly SqlConnection connection;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SQLDataSource"/> class.
+        /// Initializes a new instance of the <see cref="SqlDataSource"/> class.
         /// </summary>
-        /// <exception cref="Exception">Unable to connect to Database. Error: " + e.Message</exception>
-        public SQLDataSource()
+        /// <exception cref="Exception">Unable to connect to Database. Error: " + e.Message.</exception>
+        public SqlDataSource()
         {
-            string connectionString = "SERVER=" + server + ";" + "DATABASE=" +
-            database + ";Integrated Security=true;";
-            connection = new SqlConnection(connectionString);
+            string connectionString = "SERVER=" + this.server + ";" + "DATABASE=" +
+            this.database + ";Integrated Security=true;";
+            this.connection = new SqlConnection(connectionString);
             try
             {
-                connection.Open();
+                this.connection.Open();
             }
             catch (Exception e)
             {
-                throw new Exception("Unable to connect to Database. Error: " + e.Message);
+                Console.WriteLine("Unable to connect to Database. Error: " + e.Message);
+                throw;
             }
         }
 
         /// <summary>
         /// Gets the users.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The Object.</returns>
         public List<User> GetUsers()
         {
             string query = "SELECT * FROM MyAPI_Users";
-            SqlCommand cmd = new SqlCommand(query, connection);
+            SqlCommand cmd = new SqlCommand(query, this.connection);
             SqlDataReader reader = cmd.ExecuteReader();
 
             var output = new List<User>();
@@ -49,9 +56,10 @@ namespace GooglesRival.Controllers
                 output.Add(new User()
                 {
                     Username = reader.GetString("MyAPI_Users_Username"),
-                    Password = reader.GetString("MyAPI_Users_Password")
+                    Password = reader.GetString("MyAPI_Users_Password"),
                 });
             }
+
             reader.Close();
             return output;
         }
@@ -59,12 +67,15 @@ namespace GooglesRival.Controllers
         /// <summary>
         /// Updates the user.
         /// </summary>
-        /// <param name="theUser">The user.</param>
-        /// <returns></returns>
+        /// <param name="username">The username.</param>
+        /// <param name="password">The password.</param>
+        /// <returns>
+        /// The Object.
+        /// </returns>
         public bool UpdateUser(string username, string password)
         {
-            SqlCommand command = connection.CreateCommand();
-            command.CommandText= "UPDATE MyAPI_Users SET MyAPI_Users_Password = @Password WHERE MyAPI_Users_Username = @Username";
+            SqlCommand command = this.connection.CreateCommand();
+            command.CommandText = "UPDATE MyAPI_Users SET MyAPI_Users_Password = @Password WHERE MyAPI_Users_Username = @Username";
             command.Parameters.AddWithValue("@Password", password);
             command.Parameters.AddWithValue("@Username", username);
             try
@@ -82,11 +93,14 @@ namespace GooglesRival.Controllers
         /// <summary>
         /// Adds the user.
         /// </summary>
-        /// <param name="theUser">The user.</param>
-        /// <returns></returns>
+        /// <param name="username">The username.</param>
+        /// <param name="password">The password.</param>
+        /// <returns>
+        /// The Object.
+        /// </returns>
         public bool AddUser(string username, string password)
         {
-            SqlCommand command = connection.CreateCommand();
+            SqlCommand command = this.connection.CreateCommand();
             command.CommandText = "INSERT into MyAPI_Users (MyAPI_Users_Username, MyAPI_Users_Password) VALUES " +
                 "(@Username, @Password)";
             command.Parameters.AddWithValue("@Username", username);
@@ -103,11 +117,16 @@ namespace GooglesRival.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Gets the Messages.
+        /// </summary>
+        /// <returns>
+        /// The Object.
+        /// </returns>
         public List<Message> GetMessages()
         {
             string query = "SELECT * FROM MyAPI_Messages INNER JOIN MyAPI_Users ON MyAPI_Messages.MyAPI_Messages_UserID = MyAPI_Users.MyAPI_Users_ID";
-            SqlCommand cmd = new SqlCommand(query, connection);
+            SqlCommand cmd = new SqlCommand(query, this.connection);
             SqlDataReader reader = cmd.ExecuteReader();
 
             var output = new List<Message>();
@@ -119,9 +138,10 @@ namespace GooglesRival.Controllers
                     Username = reader.GetString("MyAPI_Users_Username"),
                     Date = reader.GetDateTime("MyAPI_Messages_Date"),
                     Subject = reader.GetString("MyAPI_Messages_Subject"),
-                    body = reader.GetString("MyAPI_Messages_Body"),
+                    Body = reader.GetString("MyAPI_Messages_Body"),
                 });
             }
+
             reader.Close();
             return output;
         }

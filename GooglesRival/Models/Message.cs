@@ -1,10 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿// <copyright file="Message.cs" company="Adam's Awesome API">
+// Copyright (c) Adam's Awesome API. All rights reserved.
+// </copyright>
 
 namespace GooglesRival.Models
 {
+    using System;
+
+    /// <summary>
+    /// Message Class.
+    /// </summary>
     public class Message
     {
         /// <summary>
@@ -45,6 +49,6 @@ namespace GooglesRival.Models
         /// <value>
         /// The body.
         /// </value>
-        public string body { get; set; }
+        public string Body { get; set; }
     }
 }

@@ -1,21 +1,30 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using GooglesRival.Services;
-using GooglesRival.Models;
-using System;
-using GooglesRival.Controllers;
+// <copyright file="MessageServiceTests.cs" company="Adam's Awesome API">
+// Copyright (c) Adam's Awesome API. All rights reserved.
+// </copyright>
 
 namespace GooglesRivalTests
 {
+    using System;
+    using GooglesRival.Controllers;
+    using GooglesRival.Models;
+    using GooglesRival.Services;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    /// <summary>
+    /// Messages Service Tests.
+    /// </summary>
     [TestClass]
     public class MessageServiceTests
     {
-
+        /// <summary>
+        /// Verifies the messages details correct.
+        /// </summary>
         [TestMethod]
         [TestCategory("Demo")]
         public void VerifyMessagesDetailsCorrect()
         {
             //// Setup
-            IDataSource dataSource = new SQLDataSource();
+            IDataSource dataSource = new SqlDataSource();
             var messageService = new MessageService(dataSource);
             Message message = new Message()
             {
@@ -23,7 +32,7 @@ namespace GooglesRivalTests
                 Username = "Admin",
                 Date = DateTime.Parse("01-01-2021"),
                 Subject = "Test",
-                body = "Testing that this works",
+                Body = "Testing that this works",
             };
             //// Act
             var sut = messageService.GetMessageById("1");
@@ -33,7 +42,7 @@ namespace GooglesRivalTests
             Assert.AreEqual(message.Id, sut.Id);
             Assert.AreEqual(message.Username, sut.Username);
             Assert.AreEqual(message.Subject, sut.Subject);
-            Assert.AreEqual(message.body, sut.body);
+            Assert.AreEqual(message.Body, sut.Body);
             Assert.AreEqual(message.Date, sut.Date);
         }
 
@@ -45,7 +54,7 @@ namespace GooglesRivalTests
         public void VerifyMessageIsReturnedForValidUsername()
         {
             //// Setup
-            IDataSource dataSource = new SQLDataSource();
+            IDataSource dataSource = new SqlDataSource();
             var messageService = new MessageService(dataSource);
             Message message = new Message()
             {
@@ -53,7 +62,7 @@ namespace GooglesRivalTests
                 Username = "Admin",
                 Date = DateTime.Parse("01-01-2021"),
                 Subject = "Test",
-                body = "Testing that this works",
+                Body = "Testing that this works",
             };
             //// Act
             var sut = messageService.GetMessagesForUser("Admin");
@@ -64,16 +73,19 @@ namespace GooglesRivalTests
             Assert.AreEqual(message.Id, sut[0].Id);
             Assert.AreEqual(message.Username, sut[0].Username);
             Assert.AreEqual(message.Subject, sut[0].Subject);
-            Assert.AreEqual(message.body, sut[0].body);
+            Assert.AreEqual(message.Body, sut[0].Body);
             Assert.AreEqual(message.Date, sut[0].Date);
         }
 
+        /// <summary>
+        /// Verifies the no message is returned for in valid username.
+        /// </summary>
         [TestMethod]
         [TestCategory("Demo")]
         public void VerifyNoMessageIsReturnedForInValidUsername()
         {
             //// Setup
-            IDataSource dataSource = new SQLDataSource();
+            IDataSource dataSource = new SqlDataSource();
             var messageService = new MessageService(dataSource);
 
             //// Act
@@ -84,12 +96,15 @@ namespace GooglesRivalTests
             Assert.AreEqual(0, sut.Count);
         }
 
+        /// <summary>
+        /// Verifies the no message is returned for in valid message identifier.
+        /// </summary>
         [TestMethod]
         [TestCategory("Demo")]
         public void VerifyNoMessageIsReturnedForInValidMessageID()
         {
             //// Setup
-            IDataSource dataSource = new SQLDataSource();
+            IDataSource dataSource = new SqlDataSource();
             var messageService = new MessageService(dataSource);
 
             //// Act

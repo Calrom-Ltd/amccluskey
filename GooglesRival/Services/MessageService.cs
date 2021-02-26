@@ -1,27 +1,34 @@
-﻿using GooglesRival.Controllers;
-using GooglesRival.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿// <copyright file="MessageService.cs" company="Adam's Awesome API">
+// Copyright (c) Adam's Awesome API. All rights reserved.
+// </copyright>
 
 namespace GooglesRival.Services
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using GooglesRival.Controllers;
+    using GooglesRival.Models;
+
+    /// <summary>
+    /// Message Service.
+    /// </summary>
+    /// <seealso cref="GooglesRival.Services.IMessageService" />
     public class MessageService : IMessageService
     {
         /// <summary>
-        /// The messages
+        /// The messages.
         /// </summary>
-        private List<Message> messages = new List<Message>();
+        private readonly List<Message> messages = new List<Message>();
 
         /// <summary>
-        /// The data source
+        /// The data source.
         /// </summary>
         private readonly IDataSource dataSource;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MessageService"/> class.
+        /// Initializes a new instance of the <see cref="MessageService" /> class.
         /// </summary>
+        /// <param name="dataSource">The data source.</param>
         public MessageService(IDataSource dataSource)
         {
             this.dataSource = dataSource;
@@ -65,23 +72,23 @@ namespace GooglesRival.Services
         }
 
         /// <summary>
-        /// Initialises the specified message.
+        /// Initializes a new instance of the <see cref="MessageService"/> class.
         /// </summary>
-        /// <param name="_message">The message.</param>
-        public MessageService(Message _message)
+        /// <param name="message">The message.</param>
+        public MessageService(Message message)
         {
-            messages.Add(_message);
+            this.messages.Add(message);
         }
 
         /// <summary>
-        /// Initialises the specified messages.
+        /// Initializes a new instance of the <see cref="MessageService"/> class.
         /// </summary>
-        /// <param name="_messages">The messages.</param>
-        public MessageService(List<Message> _messages)
+        /// <param name="messages">The messages.</param>
+        public MessageService(List<Message> messages)
         {
-            foreach (var _message in _messages)
+            foreach (var message in messages)
             {
-                messages.Add(_message);
+                this.messages.Add(message);
             }
         }
 
@@ -89,27 +96,27 @@ namespace GooglesRival.Services
         /// Gets the messages for user.
         /// </summary>
         /// <param name="username">The username.</param>
-        /// <returns></returns>
+        /// <returns>The Object.</returns>
         public List<Message> GetMessagesForUser(string username)
         {
-            var messages = dataSource.GetMessages();
-            return messages.Where(msg => msg.Username.Equals(username)).ToList();
+            var messagesFromSource = this.dataSource.GetMessages();
+            return messagesFromSource.Where(msg => msg.Username.Equals(username)).ToList();
         }
 
         /// <summary>
         /// Gets the message by identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>The Message Object.</returns>
         public Message GetMessageById(string id)
         {
-            int MessageId = int.Parse(id);
+            int messageId = int.Parse(id);
             try
             {
-                var output = dataSource.GetMessages().Single(msg => msg.Id.Equals(MessageId));
+                var output = this.dataSource.GetMessages().Single(msg => msg.Id.Equals(messageId));
                 return output;
             }
-            catch (Exception e)
+            catch
             {
                 return null;
             }

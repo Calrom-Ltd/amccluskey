@@ -1,10 +1,14 @@
-﻿using GooglesRival.Models;
-using System.Collections.Generic;
+﻿// <copyright file="IUsersService.cs" company="Adam's Awesome API">
+// Copyright (c) Adam's Awesome API. All rights reserved.
+// </copyright>
 
 namespace GooglesRival.Services.Iservices
 {
+    using System.Collections.Generic;
+    using GooglesRival.Models;
+
     /// <summary>
-    /// The IUsersService Interface
+    /// The IUsersService Interface.
     /// </summary>
     public interface IUsersService
     {
@@ -13,7 +17,7 @@ namespace GooglesRival.Services.Iservices
         /// </summary>
         /// <param name="username">The username.</param>
         /// <param name="password">The password.</param>
-        /// <returns></returns>
+        /// <returns>The Object.</returns>
         bool AddNewUser(string username, string password);
 
         /// <summary>
@@ -22,13 +26,13 @@ namespace GooglesRival.Services.Iservices
         /// <param name="username">The username.</param>
         /// <param name="oldPassword">The old password.</param>
         /// <param name="newPassword">The new password.</param>
-        /// <returns></returns>
+        /// <returns>The Object.</returns>
         bool ChangePassword(string username, string oldPassword, string newPassword);
 
         /// <summary>
         /// Gets all users.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The Object.</returns>
         List<User> GetAllUsers();
 
         /// <summary>
@@ -36,7 +40,7 @@ namespace GooglesRival.Services.Iservices
         /// </summary>
         /// <param name="username">The username.</param>
         /// <param name="password">The password.</param>
-        /// <returns></returns>
+        /// <returns>The Object.</returns>
         bool VerifyUsernameAndPassword(string username, string password);
     }
 }

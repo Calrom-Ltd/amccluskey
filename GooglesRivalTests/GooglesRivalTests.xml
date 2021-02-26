@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GooglesRivalTests</name>
+    </assembly>
+    <members>
+        <member name="T:GooglesRivalTests.MessageServiceTests">
+            <summary>
+            Messages Service Tests.
+            </summary>
+        </member>
+        <member name="M:GooglesRivalTests.MessageServiceTests.VerifyMessagesDetailsCorrect">
+            <summary>
+            Verifies the messages details correct.
+            </summary>
+        </member>
+        <member name="M:GooglesRivalTests.MessageServiceTests.VerifyMessageIsReturnedForValidUsername">
+            <summary>
+            Verifies the message expected is returned.
+            </summary>
+        </member>
+        <member name="M:GooglesRivalTests.MessageServiceTests.VerifyNoMessageIsReturnedForInValidUsername">
+            <summary>
+            Verifies the no message is returned for in valid username.
+            </summary>
+        </member>
+        <member name="M:GooglesRivalTests.MessageServiceTests.VerifyNoMessageIsReturnedForInValidMessageID">
+            <summary>
+            Verifies the no message is returned for in valid message identifier.
+            </summary>
+        </member>
+        <member name="T:GooglesRival.Services.Tests.UsersServiceTests">
+            <summary>
+            Users Service Tests.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.Services.Tests.UsersServiceTests.GetAllUsersTest">
+            <summary>
+            Gets all users test.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.Services.Tests.UsersServiceTests.VerifyCorrectUsernameAndPassword">
+            <summary>
+            Verifies the correct username and password.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.Services.Tests.UsersServiceTests.VerifyIncorrectUsername">
+            <summary>
+            Verifies the incorrect username.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.Services.Tests.UsersServiceTests.VerifyCorrectUsernameIncorrectPassword">
+            <summary>
+            Verifies the correct username incorrect password.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.Services.Tests.UsersServiceTests.VerifyAddingANewUser">
+            <summary>
+            Verifies the adding a new user.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.Services.Tests.UsersServiceTests.VerifyAddingANewUserFailsWhenUserAlreadyExists">
+            <summary>
+            Verifies the adding a new user fails when user already exists.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.Services.Tests.UsersServiceTests.VerifyCorrectUsernameAndPasswordAfterAddingNewUser">
+            <summary>
+            Verifies the correct username and password after adding new user.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.Services.Tests.UsersServiceTests.VerifyCorrectUsernameAndIncorrectPasswordAfterAddingNewUser">
+            <summary>
+            Verifies the correct username and incorrect password after adding new user.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.Services.Tests.UsersServiceTests.VerifyChangePasswordWhenOldPasswordIsCorrect">
+            <summary>
+            Verifies the change password when old password is correct.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.Services.Tests.UsersServiceTests.VerifyChangePasswordFailsWhenOldPasswordIsIncorrect">
+            <summary>
+            Verifies the change password fails when old password is incorrect.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.Services.Tests.UsersServiceTests.VerifyChangePasswordFailsWhenUserDoesntExist">
+            <summary>
+            Verifies the change password fails when user doesnt exist.
+            </summary>
+        </member>
+    </members>
+</doc>

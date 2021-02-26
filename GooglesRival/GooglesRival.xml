@@ -1,0 +1,448 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GooglesRival</name>
+    </assembly>
+    <members>
+        <member name="T:GooglesRival.Controllers.MessageController">
+            <summary>
+            Message Controller.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="F:GooglesRival.Controllers.MessageController.messageService">
+            <summary>
+            The message service.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.Controllers.MessageController.#ctor(GooglesRival.Services.IMessageService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GooglesRival.Controllers.MessageController" /> class.
+            </summary>
+            <param name="messageService">The message service.</param>
+        </member>
+        <member name="M:GooglesRival.Controllers.MessageController.GetMessagesForUser(System.String)">
+            <summary>
+            Gets the messages for user.
+            </summary>
+            <param name="username">The username.</param>
+            <returns>The Object.</returns>
+        </member>
+        <member name="M:GooglesRival.Controllers.MessageController.GetSingleMessage(System.String)">
+            <summary>
+            Gets the single message.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns>The Object.</returns>
+        </member>
+        <member name="T:GooglesRival.Controllers.UserController">
+            <summary>
+            User Controller.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="M:GooglesRival.Controllers.UserController.#ctor(GooglesRival.Services.Iservices.IUsersService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GooglesRival.Controllers.UserController"/> class.
+            </summary>
+            <param name="usersService">The users service.</param>
+        </member>
+        <member name="M:GooglesRival.Controllers.UserController.Get(System.String,System.String)">
+            <summary>
+            Gets the specified username.
+            </summary>
+            <param name="username">The username.</param>
+            <param name="password">The password.</param>
+            <returns>The Object.</returns>
+        </member>
+        <member name="M:GooglesRival.Controllers.UserController.GetAll">
+            <summary>
+            Gets all.
+            </summary>
+            <returns>The Object.</returns>
+        </member>
+        <member name="M:GooglesRival.Controllers.UserController.ChangePassword(System.String,System.String,System.String,System.String)">
+            <summary>
+            Changes the password.
+            </summary>
+            <param name="username">The username.</param>
+            <param name="oldPassword">The old password.</param>
+            <param name="newPassword">The new password.</param>
+            <param name="newPasswordConfirmation">The new password confirmation.</param>
+            <returns>The Object.</returns>
+        </member>
+        <member name="M:GooglesRival.Controllers.UserController.AddNewUser(System.String,System.String)">
+            <summary>
+            Adds the new user.
+            </summary>
+            <param name="username">The username.</param>
+            <param name="password">The password.</param>
+            <returns>The Object.</returns>
+        </member>
+        <member name="T:GooglesRival.Controllers.IDataSource">
+            <summary>
+            IDataSource Interface.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.Controllers.IDataSource.GetUsers">
+            <summary>
+            Gets the users.
+            </summary>
+            <returns>The Object.</returns>
+        </member>
+        <member name="M:GooglesRival.Controllers.IDataSource.UpdateUser(System.String,System.String)">
+            <summary>
+            Updates the user.
+            </summary>
+            <param name="username">The username.</param>
+            <param name="password">The password.</param>
+            <returns>The Object.</returns>
+        </member>
+        <member name="M:GooglesRival.Controllers.IDataSource.AddUser(System.String,System.String)">
+            <summary>
+            Adds the user.
+            </summary>
+            <param name="username">The username.</param>
+            <param name="password">The password.</param>
+            <returns>
+            The Object.
+            </returns>
+        </member>
+        <member name="M:GooglesRival.Controllers.IDataSource.GetMessages">
+            <summary>
+            Gets the Messages.
+            </summary>
+            <returns>The Object.</returns>
+        </member>
+        <member name="T:GooglesRival.Controllers.SqlDataSource">
+            <summary>
+            SQL Data Source.
+            </summary>
+            <seealso cref="T:GooglesRival.Controllers.IDataSource" />
+        </member>
+        <member name="M:GooglesRival.Controllers.SqlDataSource.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:GooglesRival.Controllers.SqlDataSource"/> class.
+            </summary>
+            <exception cref="T:System.Exception">Unable to connect to Database. Error: " + e.Message.</exception>
+        </member>
+        <member name="M:GooglesRival.Controllers.SqlDataSource.GetUsers">
+            <summary>
+            Gets the users.
+            </summary>
+            <returns>The Object.</returns>
+        </member>
+        <member name="M:GooglesRival.Controllers.SqlDataSource.UpdateUser(System.String,System.String)">
+            <summary>
+            Updates the user.
+            </summary>
+            <param name="username">The username.</param>
+            <param name="password">The password.</param>
+            <returns>
+            The Object.
+            </returns>
+        </member>
+        <member name="M:GooglesRival.Controllers.SqlDataSource.AddUser(System.String,System.String)">
+            <summary>
+            Adds the user.
+            </summary>
+            <param name="username">The username.</param>
+            <param name="password">The password.</param>
+            <returns>
+            The Object.
+            </returns>
+        </member>
+        <member name="M:GooglesRival.Controllers.SqlDataSource.GetMessages">
+            <summary>
+            Gets the Messages.
+            </summary>
+            <returns>
+            The Object.
+            </returns>
+        </member>
+        <member name="T:GooglesRival.Models.Message">
+            <summary>
+            Message Class.
+            </summary>
+        </member>
+        <member name="P:GooglesRival.Models.Message.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:GooglesRival.Models.Message.Username">
+            <summary>
+            Gets or sets the username.
+            </summary>
+            <value>
+            The username.
+            </value>
+        </member>
+        <member name="P:GooglesRival.Models.Message.Date">
+            <summary>
+            Gets or sets the date.
+            </summary>
+            <value>
+            The date.
+            </value>
+        </member>
+        <member name="P:GooglesRival.Models.Message.Subject">
+            <summary>
+            Gets or sets the subject.
+            </summary>
+            <value>
+            The subject.
+            </value>
+        </member>
+        <member name="P:GooglesRival.Models.Message.Body">
+            <summary>
+            Gets or sets the body.
+            </summary>
+            <value>
+            The body.
+            </value>
+        </member>
+        <member name="T:GooglesRival.Models.User">
+            <summary>
+            User Class.
+            </summary>
+        </member>
+        <member name="P:GooglesRival.Models.User.Username">
+            <summary>
+            Gets or sets the username.
+            </summary>
+            <value>
+            The username.
+            </value>
+        </member>
+        <member name="P:GooglesRival.Models.User.Password">
+            <summary>
+            Gets or sets the password.
+            </summary>
+            <value>
+            The password.
+            </value>
+        </member>
+        <member name="T:GooglesRival.Program">
+            <summary>
+            Program Class.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.Program.Main(System.String[])">
+            <summary>
+            Defines the entry point of the application.
+            </summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="M:GooglesRival.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Creates the host builder.
+            </summary>
+            <param name="args">The arguments.</param>
+            <returns>The Object.</returns>
+        </member>
+        <member name="T:GooglesRival.Services.IMessageService">
+            <summary>
+            Interface IMessageService.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.Services.IMessageService.GetMessageById(System.String)">
+            <summary>
+            Gets the message by identifier.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns>The Object.</returns>
+        </member>
+        <member name="M:GooglesRival.Services.IMessageService.GetMessagesForUser(System.String)">
+            <summary>
+            Gets the messages for user.
+            </summary>
+            <param name="username">The username.</param>
+            <returns>The Object.</returns>
+        </member>
+        <member name="T:GooglesRival.Services.Iservices.IUsersService">
+            <summary>
+            The IUsersService Interface.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.Services.Iservices.IUsersService.AddNewUser(System.String,System.String)">
+            <summary>
+            Adds the new user.
+            </summary>
+            <param name="username">The username.</param>
+            <param name="password">The password.</param>
+            <returns>The Object.</returns>
+        </member>
+        <member name="M:GooglesRival.Services.Iservices.IUsersService.ChangePassword(System.String,System.String,System.String)">
+            <summary>
+            Changes the password.
+            </summary>
+            <param name="username">The username.</param>
+            <param name="oldPassword">The old password.</param>
+            <param name="newPassword">The new password.</param>
+            <returns>The Object.</returns>
+        </member>
+        <member name="M:GooglesRival.Services.Iservices.IUsersService.GetAllUsers">
+            <summary>
+            Gets all users.
+            </summary>
+            <returns>The Object.</returns>
+        </member>
+        <member name="M:GooglesRival.Services.Iservices.IUsersService.VerifyUsernameAndPassword(System.String,System.String)">
+            <summary>
+            Verifies the username and password.
+            </summary>
+            <param name="username">The username.</param>
+            <param name="password">The password.</param>
+            <returns>The Object.</returns>
+        </member>
+        <member name="T:GooglesRival.Services.MessageService">
+            <summary>
+            Message Service.
+            </summary>
+            <seealso cref="T:GooglesRival.Services.IMessageService" />
+        </member>
+        <member name="F:GooglesRival.Services.MessageService.messages">
+            <summary>
+            The messages.
+            </summary>
+        </member>
+        <member name="F:GooglesRival.Services.MessageService.dataSource">
+            <summary>
+            The data source.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.Services.MessageService.#ctor(GooglesRival.Controllers.IDataSource)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GooglesRival.Services.MessageService" /> class.
+            </summary>
+            <param name="dataSource">The data source.</param>
+        </member>
+        <member name="M:GooglesRival.Services.MessageService.#ctor(GooglesRival.Models.Message)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GooglesRival.Services.MessageService"/> class.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:GooglesRival.Services.MessageService.#ctor(System.Collections.Generic.List{GooglesRival.Models.Message})">
+            <summary>
+            Initializes a new instance of the <see cref="T:GooglesRival.Services.MessageService"/> class.
+            </summary>
+            <param name="messages">The messages.</param>
+        </member>
+        <member name="M:GooglesRival.Services.MessageService.GetMessagesForUser(System.String)">
+            <summary>
+            Gets the messages for user.
+            </summary>
+            <param name="username">The username.</param>
+            <returns>The Object.</returns>
+        </member>
+        <member name="M:GooglesRival.Services.MessageService.GetMessageById(System.String)">
+            <summary>
+            Gets the message by identifier.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns>The Message Object.</returns>
+        </member>
+        <member name="T:GooglesRival.Services.UsersService">
+            <summary>
+            Users Service.
+            </summary>
+            <seealso cref="T:GooglesRival.Services.Iservices.IUsersService" />
+        </member>
+        <member name="F:GooglesRival.Services.UsersService.dataSource">
+            <summary>
+            The data source.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.Services.UsersService.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:GooglesRival.Services.UsersService"/> class.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.Services.UsersService.#ctor(GooglesRival.Controllers.IDataSource)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GooglesRival.Services.UsersService" /> class.
+            </summary>
+            <param name="dataSource">The data source.</param>
+        </member>
+        <member name="M:GooglesRival.Services.UsersService.GetAllUsers">
+            <summary>
+            Gets all users.
+            </summary>
+            <returns>The Object.</returns>
+        </member>
+        <member name="M:GooglesRival.Services.UsersService.VerifyUsernameAndPassword(System.String,System.String)">
+            <summary>
+            Verifies the username and password.
+            </summary>
+            <param name="username">The username.</param>
+            <param name="password">The password.</param>
+            <returns>The Object.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            username
+            or
+            password.
+            </exception>
+        </member>
+        <member name="M:GooglesRival.Services.UsersService.ChangePassword(System.String,System.String,System.String)">
+            <summary>
+            Changes the password.
+            </summary>
+            <param name="username">The username.</param>
+            <param name="oldPassword">The old password.</param>
+            <param name="newPassword">The new password.</param>
+            <returns>The Object.</returns>
+        </member>
+        <member name="M:GooglesRival.Services.UsersService.AddNewUser(System.String,System.String)">
+            <summary>
+            Adds the new user.
+            </summary>
+            <param name="username">The username.</param>
+            <param name="password">The password.</param>
+            <returns>The Object.</returns>
+        </member>
+        <member name="M:GooglesRival.Services.UsersService.DoesUserExist(System.String)">
+            <summary>
+            Doeses the user exist.
+            </summary>
+            <param name="username">The username.</param>
+            <returns>The Object.</returns>
+        </member>
+        <member name="T:GooglesRival.Startup">
+            <summary>
+            Startup Class.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GooglesRival.Startup"/> class.
+            </summary>
+            <param name="configuration">The configuration.</param>
+        </member>
+        <member name="P:GooglesRival.Startup.Configuration">
+            <summary>
+            Gets the configuration.
+            </summary>
+            <value>
+            The configuration.
+            </value>
+        </member>
+        <member name="M:GooglesRival.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures the services.
+            </summary>
+            <param name="services">The services.</param>
+        </member>
+        <member name="M:GooglesRival.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Configures the specified application.
+            </summary>
+            <param name="app">The application.</param>
+            <param name="env">The env.</param>
+        </member>
+    </members>
+</doc>

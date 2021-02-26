@@ -1,52 +1,55 @@
-﻿using GooglesRival.Models;
-using GooglesRival.Services;
-using GooglesRival.Services.Iservices;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿// <copyright file="UserController.cs" company="Adam's Awesome API">
+// Copyright (c) Adam's Awesome API. All rights reserved.
+// </copyright>
 
 namespace GooglesRival.Controllers
 {
+    using System.Collections.Generic;
+    using GooglesRival.Models;
+    using GooglesRival.Services.Iservices;
+    using Microsoft.AspNetCore.Mvc;
+
+    /// <summary>
+    /// User Controller.
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
     [ApiController]
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly ILogger<UserController> _logger;
-
         private readonly IUsersService usersService;
 
-        public UserController(ILogger<UserController> logger, IUsersService usersService)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserController"/> class.
+        /// </summary>
+        /// <param name="usersService">The users service.</param>
+        public UserController(IUsersService usersService)
         {
-            _logger = logger;
             this.usersService = usersService;
         }
-        
+
         /// <summary>
         /// Gets the specified username.
         /// </summary>
-        /// <param name="Username">The username.</param>
+        /// <param name="username">The username.</param>
         /// <param name="password">The password.</param>
-        /// <returns></returns>
+        /// <returns>The Object.</returns>
         [HttpPost]
         [Route("Login")]
-        public ActionResult<bool> Get(string Username, string password)
+        public ActionResult<bool> Get(string username, string password)
         {
-            return Ok(usersService.VerifyUsernameAndPassword(Username, password));
+            return this.Ok(this.usersService.VerifyUsernameAndPassword(username, password));
         }
-
 
         /// <summary>
         /// Gets all.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The Object.</returns>
         [HttpGet]
         [Route("DisplayUsers")]
         public List<User> GetAll()
         {
-            return usersService.GetAllUsers();
+            return this.usersService.GetAllUsers();
         }
 
         /// <summary>
@@ -56,23 +59,30 @@ namespace GooglesRival.Controllers
         /// <param name="oldPassword">The old password.</param>
         /// <param name="newPassword">The new password.</param>
         /// <param name="newPasswordConfirmation">The new password confirmation.</param>
-        /// <returns></returns>
+        /// <returns>The Object.</returns>
         [HttpGet]
         [Route("ChangePassword")]
         public ActionResult<bool> ChangePassword(string username, string oldPassword, string newPassword, string newPasswordConfirmation)
         {
             if (newPassword != newPasswordConfirmation)
             {
-                return StatusCode(500);
+                return this.StatusCode(500);
             }
-            return Ok(usersService.ChangePassword(username, oldPassword, newPassword));
+
+            return this.Ok(this.usersService.ChangePassword(username, oldPassword, newPassword));
         }
 
+        /// <summary>
+        /// Adds the new user.
+        /// </summary>
+        /// <param name="username">The username.</param>
+        /// <param name="password">The password.</param>
+        /// <returns>The Object.</returns>
         [HttpPut]
         [Route("AddNewUser")]
         public ActionResult<bool> AddNewUser(string username, string password)
         {
-            return Ok(usersService.AddNewUser(username, password));
+            return this.Ok(this.usersService.AddNewUser(username, password));
         }
     }
 }
