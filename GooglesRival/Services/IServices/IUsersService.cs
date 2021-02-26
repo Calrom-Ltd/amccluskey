@@ -1,8 +1,12 @@
-﻿using GooglesRival.Models;
-using System.Collections.Generic;
+﻿// <copyright file="IUsersService.cs" company="Adam's Awesome API">
+// Copyright (c) Adam's Awesome API. All rights reserved.
+// </copyright>
 
 namespace GooglesRival.Services.Iservices
 {
+    using System.Collections.Generic;
+    using GooglesRival.Models;
+
     /// <summary>
     /// The IUsersService Interface
     /// </summary>

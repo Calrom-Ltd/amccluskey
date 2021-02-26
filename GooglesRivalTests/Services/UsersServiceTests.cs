@@ -1,20 +1,20 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using GooglesRival.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GooglesRival.Controllers;
-using Moq;
-using GooglesRival.Models;
+﻿// <copyright file="UsersServiceTests.cs" company="Adam's Awesome API">
+// Copyright (c) Adam's Awesome API. All rights reserved.
+// </copyright>
 
 namespace GooglesRival.Services.Tests
 {
-    [TestClass()]
+    using System.Collections.Generic;
+    using GooglesRival.Controllers;
+    using GooglesRival.Models;
+    using GooglesRival.Services;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
+
+    [TestClass]
     public class UsersServiceTests
     {
-        [TestMethod()]
+        [TestMethod]
         public void GetAllUsersTest()
         {
             //// Setup
@@ -22,14 +22,14 @@ namespace GooglesRival.Services.Tests
             var service = new UsersService(dataSource);
 
             //// Act
-            var sut  = service.GetAllUsers();
+            var sut = service.GetAllUsers();
 
             ////Assert
             Assert.IsNotNull(sut);
             Assert.AreNotEqual(0, sut.Count);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void VerifyCorrectUsernameAndPassword()
         {
             //// Setup
@@ -37,14 +37,14 @@ namespace GooglesRival.Services.Tests
             var service = new UsersService(dataSource);
 
             //// Act
-            var sut = service.VerifyUsernameAndPassword("PapaJeff","HanzoMain");
+            var sut = service.VerifyUsernameAndPassword("PapaJeff", "HanzoMain");
 
             ////Assert
             Assert.IsNotNull(sut);
             Assert.IsTrue(sut);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void VerifyIncorrectUsername()
         {
             //// Setup
@@ -59,7 +59,7 @@ namespace GooglesRival.Services.Tests
             Assert.IsFalse(sut);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void VerifyCorrectUsernameIncorrectPassword()
         {
             //// Setup
@@ -74,7 +74,7 @@ namespace GooglesRival.Services.Tests
             Assert.IsFalse(sut);
         }
 
-        [TestMethod()]
+        [TestMethod]
         [TestCategory("MockTests")]
         public void VerifyAddingANewUser()
         {
@@ -96,7 +96,7 @@ namespace GooglesRival.Services.Tests
             Assert.IsTrue(sut);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void VerifyAddingANewUserFailsWhenUserAlreadyExists()
         {
             //// Setup
@@ -116,7 +116,7 @@ namespace GooglesRival.Services.Tests
             Assert.IsFalse(sut);
         }
 
-        [TestMethod()]
+        [TestMethod]
         [TestCategory("MockTests")]
         public void VerifyCorrectUsernameAndPasswordAfterAddingNewUser()
         {
@@ -142,7 +142,7 @@ namespace GooglesRival.Services.Tests
             Assert.IsTrue(sut);
         }
 
-        [TestMethod()]
+        [TestMethod]
         [TestCategory("MockTests")]
         public void VerifyCorrectUsernameAndIncorrectPasswordAfterAddingNewUser()
         {
@@ -159,7 +159,6 @@ namespace GooglesRival.Services.Tests
             mDataSource.Setup(data => data.GetUsers()).Returns(usersList);
             var service = new UsersService(mDataSource.Object);
 
-
             //// Act
             _ = service.AddNewUser(user.Username, user.Password);
             var sut = service.VerifyUsernameAndPassword("NewUser", "HanzoMain");
@@ -169,8 +168,7 @@ namespace GooglesRival.Services.Tests
             Assert.IsFalse(sut);
         }
 
-
-        [TestMethod()]
+        [TestMethod]
         [TestCategory("MockTests")]
         public void VerifyChangePasswordWhenOldPasswordIsCorrect()
         {
@@ -200,7 +198,7 @@ namespace GooglesRival.Services.Tests
             Assert.IsTrue(sut);
         }
 
-        [TestMethod()]
+        [TestMethod]
         [TestCategory("MockTests")]
         public void VerifyChangePasswordFailsWhenOldPasswordIsIncorrect()
         {
@@ -230,7 +228,7 @@ namespace GooglesRival.Services.Tests
             Assert.IsFalse(sut);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void VerifyChangePasswordFailsWhenUserDoesntExist()
         {
             //// Setup

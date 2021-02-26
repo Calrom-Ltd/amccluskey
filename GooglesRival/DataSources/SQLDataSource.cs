@@ -1,11 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using GooglesRival.Models;
-using System.Data;
+﻿// <copyright file="SQLDataSource.cs" company="Adam's Awesome API">
+// Copyright (c) Adam's Awesome API. All rights reserved.
+// </copyright>
 
 namespace GooglesRival.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Data.SqlClient;
+    using GooglesRival.Models;
+
     public class SQLDataSource : IDataSource
     {
         private readonly string server = "localhost\\SQLEXPRESS";
@@ -18,12 +22,12 @@ namespace GooglesRival.Controllers
         /// <exception cref="Exception">Unable to connect to Database. Error: " + e.Message</exception>
         public SQLDataSource()
         {
-            string connectionString = "SERVER=" + server + ";" + "DATABASE=" +
-            database + ";Integrated Security=true;";
-            connection = new SqlConnection(connectionString);
+            string connectionString = "SERVER=" + this.server + ";" + "DATABASE=" +
+            this.database + ";Integrated Security=true;";
+            this.connection = new SqlConnection(connectionString);
             try
             {
-                connection.Open();
+                this.connection.Open();
             }
             catch (Exception e)
             {
@@ -38,7 +42,7 @@ namespace GooglesRival.Controllers
         public List<User> GetUsers()
         {
             string query = "SELECT * FROM MyAPI_Users";
-            SqlCommand cmd = new SqlCommand(query, connection);
+            SqlCommand cmd = new SqlCommand(query, this.connection);
             SqlDataReader reader = cmd.ExecuteReader();
 
             var output = new List<User>();
@@ -47,9 +51,10 @@ namespace GooglesRival.Controllers
                 output.Add(new User()
                 {
                     Username = reader.GetString("MyAPI_Users_Username"),
-                    Password = reader.GetString("MyAPI_Users_Password")
+                    Password = reader.GetString("MyAPI_Users_Password"),
                 });
             }
+
             reader.Close();
             return output;
         }
@@ -61,8 +66,8 @@ namespace GooglesRival.Controllers
         /// <returns></returns>
         public bool UpdateUser(string username, string password)
         {
-            SqlCommand command = connection.CreateCommand();
-            command.CommandText= "UPDATE MyAPI_Users SET MyAPI_Users_Password = @Password WHERE MyAPI_Users_Username = @Username";
+            SqlCommand command = this.connection.CreateCommand();
+            command.CommandText = "UPDATE MyAPI_Users SET MyAPI_Users_Password = @Password WHERE MyAPI_Users_Username = @Username";
             command.Parameters.AddWithValue("@Password", password);
             command.Parameters.AddWithValue("@Username", username);
             try
@@ -84,7 +89,7 @@ namespace GooglesRival.Controllers
         /// <returns></returns>
         public bool AddUser(string username, string password)
         {
-            SqlCommand command = connection.CreateCommand();
+            SqlCommand command = this.connection.CreateCommand();
             command.CommandText = "INSERT into MyAPI_Users (MyAPI_Users_Username, MyAPI_Users_Password) VALUES " +
                 "(@Username, @Password)";
             command.Parameters.AddWithValue("@Username", username);
@@ -101,11 +106,10 @@ namespace GooglesRival.Controllers
             }
         }
 
-
         public List<Message> GetMessages()
         {
             string query = "SELECT * FROM MyAPI_Messages INNER JOIN MyAPI_Users ON MyAPI_Messages.MyAPI_Messages_UserID = MyAPI_Users.MyAPI_Users_ID";
-            SqlCommand cmd = new SqlCommand(query, connection);
+            SqlCommand cmd = new SqlCommand(query, this.connection);
             SqlDataReader reader = cmd.ExecuteReader();
 
             var output = new List<Message>();
@@ -120,6 +124,7 @@ namespace GooglesRival.Controllers
                     Body = reader.GetString("MyAPI_Messages_Body"),
                 });
             }
+
             reader.Close();
             return output;
         }

@@ -1,9 +1,13 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-using System.Diagnostics.CodeAnalysis;
+// <copyright file="Program.cs" company="Adam's Awesome API">
+// Copyright (c) Adam's Awesome API. All rights reserved.
+// </copyright>
 
 namespace GooglesRival
 {
+    using System.Diagnostics.CodeAnalysis;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Hosting;
+
     [ExcludeFromCodeCoverage]
     public class Program
     {

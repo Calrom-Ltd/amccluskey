@@ -1,15 +1,18 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using GooglesRival.Services;
-using GooglesRival.Models;
-using System;
-using GooglesRival.Controllers;
+// <copyright file="MessageServiceTests.cs" company="Adam's Awesome API">
+// Copyright (c) Adam's Awesome API. All rights reserved.
+// </copyright>
 
 namespace GooglesRivalTests
 {
+    using System;
+    using GooglesRival.Controllers;
+    using GooglesRival.Models;
+    using GooglesRival.Services;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class MessageServiceTests
     {
-
         [TestMethod]
         [TestCategory("Demo")]
         public void VerifyMessagesDetailsCorrect()

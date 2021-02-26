@@ -1,12 +1,16 @@
-﻿using GooglesRival.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using GooglesRival.Services.Iservices;
-using GooglesRival.Controllers;
+﻿// <copyright file="UsersService.cs" company="Adam's Awesome API">
+// Copyright (c) Adam's Awesome API. All rights reserved.
+// </copyright>
 
 namespace GooglesRival.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using GooglesRival.Controllers;
+    using GooglesRival.Models;
+    using GooglesRival.Services.Iservices;
+
     public class UsersService : IUsersService
     {
         /// <summary>
@@ -50,13 +54,21 @@ namespace GooglesRival.Services
         {
             var users = this.dataSource.GetUsers();
             if (username == null)
+            {
                 throw new ArgumentNullException(nameof(username));
+            }
             else if (password == null)
+            {
                 throw new ArgumentNullException(nameof(password));
+            }
             else if (users.Any(x => x.Username.Contains(username) && x.Password == password))
+            {
                 return true;
+            }
             else
+            {
                 return false;
+            }
         }
 
         /// <summary>
@@ -73,10 +85,30 @@ namespace GooglesRival.Services
             {
                 if (user.Username == username && user.Password == oldPassword)
                 {
-                    return dataSource.UpdateUser(username, newPassword);
+                    return this.dataSource.UpdateUser(username, newPassword);
                 }
             }
+
             return false;
+        }
+
+        /// <summary>
+        /// Adds the new user.
+        /// </summary>
+        /// <param name="username">The username.</param>
+        /// <param name="password">The password.</param>
+        /// <returns></returns>
+        public bool AddNewUser(string username, string password)
+        {
+            if (!this.DoesUserExist(username))
+            {
+                var output = this.dataSource.AddUser(username, password);
+                return output;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -89,29 +121,12 @@ namespace GooglesRival.Services
             try
             {
                 var users = this.dataSource.GetUsers();
-                return (users.Any(x => x.Username == username));
+                return users.Any(x => x.Username == username);
             }
             catch
             {
                 return false;
             }
-        }
-
-        /// <summary>
-        /// Adds the new user.
-        /// </summary>
-        /// <param name="username">The username.</param>
-        /// <param name="password">The password.</param>
-        /// <returns></returns>
-        public bool AddNewUser(string username, string password)
-        {
-            if (!DoesUserExist(username))
-            {
-                var output = this.dataSource.AddUser(username, password);
-                return output;
-            }
-            else
-                return false;
         }
     }
 }

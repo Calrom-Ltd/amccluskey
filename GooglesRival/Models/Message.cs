@@ -1,7 +1,11 @@
-﻿using System;
+﻿// <copyright file="Message.cs" company="Adam's Awesome API">
+// Copyright (c) Adam's Awesome API. All rights reserved.
+// </copyright>
 
 namespace GooglesRival.Models
 {
+    using System;
+
     public class Message
     {
         /// <summary>

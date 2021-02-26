@@ -1,12 +1,16 @@
-﻿using GooglesRival.Models;
-using GooglesRival.Services;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿// <copyright file="MessageController.cs" company="Adam's Awesome API">
+// Copyright (c) Adam's Awesome API. All rights reserved.
+// </copyright>
 
 namespace GooglesRival.Controllers
 {
+    using System.Collections.Generic;
+    using GooglesRival.Models;
+    using GooglesRival.Services;
+    using Microsoft.AspNetCore.Mvc;
+
     /// <summary>
-    /// 
+    /// Message Controller.
     /// </summary>
     /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
     [ApiController]
@@ -36,7 +40,7 @@ namespace GooglesRival.Controllers
         [Route("GetMessagesForUser")]
         public IEnumerable<Message> GetMessagesForUser(string username)
         {
-            return messageService.GetMessagesForUser(username);
+            return this.messageService.GetMessagesForUser(username);
         }
 
         /// <summary>
@@ -48,7 +52,7 @@ namespace GooglesRival.Controllers
         [Route("GetMessageById")]
         public ActionResult<Message> GetSingleMessage(string id)
         {
-            return Ok(messageService.GetMessageById(id));
+            return this.Ok(this.messageService.GetMessageById(id));
         }
     }
 }

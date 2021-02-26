@@ -1,8 +1,12 @@
-﻿using GooglesRival.Models;
-using System.Collections.Generic;
+﻿// <copyright file="IDataSource.cs" company="Adam's Awesome API">
+// Copyright (c) Adam's Awesome API. All rights reserved.
+// </copyright>
 
 namespace GooglesRival.Controllers
 {
+    using System.Collections.Generic;
+    using GooglesRival.Models;
+
     public interface IDataSource
     {
         /// <summary>

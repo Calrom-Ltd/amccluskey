@@ -1,11 +1,14 @@
-﻿using GooglesRival.Controllers;
-using GooglesRival.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿// <copyright file="MessageService.cs" company="Adam's Awesome API">
+// Copyright (c) Adam's Awesome API. All rights reserved.
+// </copyright>
 
 namespace GooglesRival.Services
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using GooglesRival.Controllers;
+    using GooglesRival.Models;
+
     public class MessageService : IMessageService
     {
         /// <summary>
@@ -66,21 +69,21 @@ namespace GooglesRival.Services
         /// <summary>
         /// Initialises the specified message.
         /// </summary>
-        /// <param name="_message">The message.</param>
-        public MessageService(Message _message)
+        /// <param name="message">The message.</param>
+        public MessageService(Message message)
         {
-            messages.Add(_message);
+            this.messages.Add(message);
         }
 
         /// <summary>
         /// Initialises the specified messages.
         /// </summary>
         /// <param name="_messages">The messages.</param>
-        public MessageService(List<Message> _messages)
+        public MessageService(List<Message> messages)
         {
-            foreach (var _message in _messages)
+            foreach (var message in messages)
             {
-                messages.Add(_message);
+                this.messages.Add(message);
             }
         }
 
@@ -91,7 +94,7 @@ namespace GooglesRival.Services
         /// <returns></returns>
         public List<Message> GetMessagesForUser(string username)
         {
-            var messages = dataSource.GetMessages();
+            var messages = this.dataSource.GetMessages();
             return messages.Where(msg => msg.Username.Equals(username)).ToList();
         }
 
@@ -102,10 +105,10 @@ namespace GooglesRival.Services
         /// <returns></returns>
         public Message GetMessageById(string id)
         {
-            int MessageId = int.Parse(id);
+            int messageId = int.Parse(id);
             try
             {
-                var output = dataSource.GetMessages().Single(msg => msg.Id.Equals(MessageId));
+                var output = this.dataSource.GetMessages().Single(msg => msg.Id.Equals(messageId));
                 return output;
             }
             catch

@@ -1,22 +1,26 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using GooglesRival.Services;
-using GooglesRival.Services.Iservices;
-using GooglesRival.Controllers;
-using System.Diagnostics.CodeAnalysis;
+// <copyright file="Startup.cs" company="Adam's Awesome API">
+// Copyright (c) Adam's Awesome API. All rights reserved.
+// </copyright>
 
 namespace GooglesRival
 {
+    using System.Diagnostics.CodeAnalysis;
+    using GooglesRival.Controllers;
+    using GooglesRival.Services;
+    using GooglesRival.Services.Iservices;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+    using Microsoft.OpenApi.Models;
+
     [ExcludeFromCodeCoverage]
     public class Startup
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -39,7 +43,7 @@ namespace GooglesRival
         {
             ////If the release config is not debug, but the development flag is set in the system variables
             if (env.IsDevelopment())
-            { 
+            {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GooglesRival v1"));

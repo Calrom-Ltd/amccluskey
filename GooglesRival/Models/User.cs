@@ -1,4 +1,8 @@
-﻿namespace GooglesRival.Models
+﻿// <copyright file="User.cs" company="Adam's Awesome API">
+// Copyright (c) Adam's Awesome API. All rights reserved.
+// </copyright>
+
+namespace GooglesRival.Models
 {
     public class User
     {
