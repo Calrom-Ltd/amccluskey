@@ -24,7 +24,7 @@ namespace GooglesRivalTests
         public void VerifyMessagesDetailsCorrect()
         {
             //// Setup
-            IDataSource dataSource = new SQLDataSource();
+            IDataSource dataSource = new SqlDataSource();
             var messageService = new MessageService(dataSource);
             Message message = new Message()
             {
@@ -54,7 +54,7 @@ namespace GooglesRivalTests
         public void VerifyMessageIsReturnedForValidUsername()
         {
             //// Setup
-            IDataSource dataSource = new SQLDataSource();
+            IDataSource dataSource = new SqlDataSource();
             var messageService = new MessageService(dataSource);
             Message message = new Message()
             {
@@ -85,7 +85,7 @@ namespace GooglesRivalTests
         public void VerifyNoMessageIsReturnedForInValidUsername()
         {
             //// Setup
-            IDataSource dataSource = new SQLDataSource();
+            IDataSource dataSource = new SqlDataSource();
             var messageService = new MessageService(dataSource);
 
             //// Act
@@ -104,7 +104,7 @@ namespace GooglesRivalTests
         public void VerifyNoMessageIsReturnedForInValidMessageID()
         {
             //// Setup
-            IDataSource dataSource = new SQLDataSource();
+            IDataSource dataSource = new SqlDataSource();
             var messageService = new MessageService(dataSource);
 
             //// Act

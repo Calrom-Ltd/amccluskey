@@ -114,25 +114,25 @@
             </summary>
             <returns>The Object.</returns>
         </member>
-        <member name="T:GooglesRival.Controllers.SQLDataSource">
+        <member name="T:GooglesRival.Controllers.SqlDataSource">
             <summary>
             SQL Data Source.
             </summary>
             <seealso cref="T:GooglesRival.Controllers.IDataSource" />
         </member>
-        <member name="M:GooglesRival.Controllers.SQLDataSource.#ctor">
+        <member name="M:GooglesRival.Controllers.SqlDataSource.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:GooglesRival.Controllers.SQLDataSource"/> class.
+            Initializes a new instance of the <see cref="T:GooglesRival.Controllers.SqlDataSource"/> class.
             </summary>
             <exception cref="T:System.Exception">Unable to connect to Database. Error: " + e.Message.</exception>
         </member>
-        <member name="M:GooglesRival.Controllers.SQLDataSource.GetUsers">
+        <member name="M:GooglesRival.Controllers.SqlDataSource.GetUsers">
             <summary>
             Gets the users.
             </summary>
             <returns>The Object.</returns>
         </member>
-        <member name="M:GooglesRival.Controllers.SQLDataSource.UpdateUser(System.String,System.String)">
+        <member name="M:GooglesRival.Controllers.SqlDataSource.UpdateUser(System.String,System.String)">
             <summary>
             Updates the user.
             </summary>
@@ -142,7 +142,7 @@
             The Object.
             </returns>
         </member>
-        <member name="M:GooglesRival.Controllers.SQLDataSource.AddUser(System.String,System.String)">
+        <member name="M:GooglesRival.Controllers.SqlDataSource.AddUser(System.String,System.String)">
             <summary>
             Adds the user.
             </summary>
@@ -152,7 +152,7 @@
             The Object.
             </returns>
         </member>
-        <member name="M:GooglesRival.Controllers.SQLDataSource.GetMessages">
+        <member name="M:GooglesRival.Controllers.SqlDataSource.GetMessages">
             <summary>
             Gets the Messages.
             </summary>

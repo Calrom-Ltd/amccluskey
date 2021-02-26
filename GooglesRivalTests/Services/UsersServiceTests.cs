@@ -24,7 +24,7 @@ namespace GooglesRival.Services.Tests
         public void GetAllUsersTest()
         {
             //// Setup
-            IDataSource dataSource = new SQLDataSource();
+            IDataSource dataSource = new SqlDataSource();
             var service = new UsersService(dataSource);
 
             //// Act
@@ -42,7 +42,7 @@ namespace GooglesRival.Services.Tests
         public void VerifyCorrectUsernameAndPassword()
         {
             //// Setup
-            IDataSource dataSource = new SQLDataSource();
+            IDataSource dataSource = new SqlDataSource();
             var service = new UsersService(dataSource);
 
             //// Act
@@ -60,7 +60,7 @@ namespace GooglesRival.Services.Tests
         public void VerifyIncorrectUsername()
         {
             //// Setup
-            IDataSource dataSource = new SQLDataSource();
+            IDataSource dataSource = new SqlDataSource();
             var service = new UsersService(dataSource);
 
             //// Act
@@ -78,7 +78,7 @@ namespace GooglesRival.Services.Tests
         public void VerifyCorrectUsernameIncorrectPassword()
         {
             //// Setup
-            IDataSource dataSource = new SQLDataSource();
+            IDataSource dataSource = new SqlDataSource();
             var service = new UsersService(dataSource);
 
             //// Act
@@ -121,7 +121,7 @@ namespace GooglesRival.Services.Tests
         public void VerifyAddingANewUserFailsWhenUserAlreadyExists()
         {
             //// Setup
-            IDataSource dataSource = new SQLDataSource();
+            IDataSource dataSource = new SqlDataSource();
             var service = new UsersService(dataSource);
             Models.User user = new Models.User()
             {
@@ -152,8 +152,10 @@ namespace GooglesRival.Services.Tests
                 Password = "bar",
             };
             mDataSource.Setup(data => data.AddUser(user.Username, user.Password)).Returns(true);
-            var usersList = new List<User>();
-            usersList.Add(user);
+            var usersList = new List<User>
+            {
+                user,
+            };
             mDataSource.Setup(data => data.GetUsers()).Returns(usersList);
             var service = new UsersService(mDataSource.Object);
 
@@ -181,8 +183,10 @@ namespace GooglesRival.Services.Tests
                 Password = "bar",
             };
             mDataSource.Setup(data => data.AddUser(user.Username, user.Password)).Returns(true);
-            var usersList = new List<User>();
-            usersList.Add(user);
+            var usersList = new List<User>
+            {
+                user,
+            };
             mDataSource.Setup(data => data.GetUsers()).Returns(usersList);
             var service = new UsersService(mDataSource.Object);
 
@@ -215,8 +219,10 @@ namespace GooglesRival.Services.Tests
                 Password = "Ohnonono",
             };
             mDataSource.Setup(data => data.UpdateUser(newUser.Username, newUser.Password)).Returns(true);
-            var usersList = new List<User>();
-            usersList.Add(user);
+            var usersList = new List<User>
+            {
+                user,
+            };
             mDataSource.Setup(data => data.GetUsers()).Returns(usersList);
             var service = new UsersService(mDataSource.Object);
 
@@ -248,8 +254,10 @@ namespace GooglesRival.Services.Tests
                 Password = "Ohnonono",
             };
             mDataSource.Setup(data => data.UpdateUser(newUser.Username, newUser.Password)).Returns(true);
-            var usersList = new List<User>();
-            usersList.Add(user);
+            var usersList = new List<User>
+            {
+                user,
+            };
             mDataSource.Setup(data => data.GetUsers()).Returns(usersList);
             var service = new UsersService(mDataSource.Object);
 
@@ -268,7 +276,7 @@ namespace GooglesRival.Services.Tests
         public void VerifyChangePasswordFailsWhenUserDoesntExist()
         {
             //// Setup
-            IDataSource dataSource = new SQLDataSource();
+            IDataSource dataSource = new SqlDataSource();
             var service = new UsersService(dataSource);
 
             //// Act

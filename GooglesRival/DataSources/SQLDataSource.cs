@@ -1,4 +1,4 @@
-﻿// <copyright file="SQLDataSource.cs" company="Adam's Awesome API">
+﻿// <copyright file="SqlDataSource.cs" company="Adam's Awesome API">
 // Copyright (c) Adam's Awesome API. All rights reserved.
 // </copyright>
 
@@ -14,17 +14,17 @@ namespace GooglesRival.Controllers
     /// SQL Data Source.
     /// </summary>
     /// <seealso cref="GooglesRival.Controllers.IDataSource" />
-    public class SQLDataSource : IDataSource
+    public class SqlDataSource : IDataSource
     {
         private readonly string server = "localhost\\SQLEXPRESS";
         private readonly string database = "MyAPI";
         private readonly SqlConnection connection;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SQLDataSource"/> class.
+        /// Initializes a new instance of the <see cref="SqlDataSource"/> class.
         /// </summary>
         /// <exception cref="Exception">Unable to connect to Database. Error: " + e.Message.</exception>
-        public SQLDataSource()
+        public SqlDataSource()
         {
             string connectionString = "SERVER=" + this.server + ";" + "DATABASE=" +
             this.database + ";Integrated Security=true;";
@@ -35,7 +35,8 @@ namespace GooglesRival.Controllers
             }
             catch (Exception e)
             {
-                throw new Exception("Unable to connect to Database. Error: " + e.Message);
+                Console.WriteLine("Unable to connect to Database. Error: " + e.Message);
+                throw;
             }
         }
 
