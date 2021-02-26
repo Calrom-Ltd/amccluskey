@@ -6,6 +6,9 @@ namespace GooglesRival.Models
 {
     using System;
 
+    /// <summary>
+    /// Message Class.
+    /// </summary>
     public class Message
     {
         /// <summary>

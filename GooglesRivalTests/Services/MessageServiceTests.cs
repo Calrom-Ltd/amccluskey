@@ -10,9 +10,15 @@ namespace GooglesRivalTests
     using GooglesRival.Services;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    /// <summary>
+    /// Messages Service Tests.
+    /// </summary>
     [TestClass]
     public class MessageServiceTests
     {
+        /// <summary>
+        /// Verifies the messages details correct.
+        /// </summary>
         [TestMethod]
         [TestCategory("Demo")]
         public void VerifyMessagesDetailsCorrect()
@@ -71,6 +77,9 @@ namespace GooglesRivalTests
             Assert.AreEqual(message.Date, sut[0].Date);
         }
 
+        /// <summary>
+        /// Verifies the no message is returned for in valid username.
+        /// </summary>
         [TestMethod]
         [TestCategory("Demo")]
         public void VerifyNoMessageIsReturnedForInValidUsername()
@@ -87,6 +96,9 @@ namespace GooglesRivalTests
             Assert.AreEqual(0, sut.Count);
         }
 
+        /// <summary>
+        /// Verifies the no message is returned for in valid message identifier.
+        /// </summary>
         [TestMethod]
         [TestCategory("Demo")]
         public void VerifyNoMessageIsReturnedForInValidMessageID()

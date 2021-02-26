@@ -11,9 +11,15 @@ namespace GooglesRival.Services.Tests
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
 
+    /// <summary>
+    /// Users Service Tests.
+    /// </summary>
     [TestClass]
     public class UsersServiceTests
     {
+        /// <summary>
+        /// Gets all users test.
+        /// </summary>
         [TestMethod]
         public void GetAllUsersTest()
         {
@@ -29,6 +35,9 @@ namespace GooglesRival.Services.Tests
             Assert.AreNotEqual(0, sut.Count);
         }
 
+        /// <summary>
+        /// Verifies the correct username and password.
+        /// </summary>
         [TestMethod]
         public void VerifyCorrectUsernameAndPassword()
         {
@@ -44,6 +53,9 @@ namespace GooglesRival.Services.Tests
             Assert.IsTrue(sut);
         }
 
+        /// <summary>
+        /// Verifies the incorrect username.
+        /// </summary>
         [TestMethod]
         public void VerifyIncorrectUsername()
         {
@@ -59,6 +71,9 @@ namespace GooglesRival.Services.Tests
             Assert.IsFalse(sut);
         }
 
+        /// <summary>
+        /// Verifies the correct username incorrect password.
+        /// </summary>
         [TestMethod]
         public void VerifyCorrectUsernameIncorrectPassword()
         {
@@ -74,6 +89,9 @@ namespace GooglesRival.Services.Tests
             Assert.IsFalse(sut);
         }
 
+        /// <summary>
+        /// Verifies the adding a new user.
+        /// </summary>
         [TestMethod]
         [TestCategory("MockTests")]
         public void VerifyAddingANewUser()
@@ -96,6 +114,9 @@ namespace GooglesRival.Services.Tests
             Assert.IsTrue(sut);
         }
 
+        /// <summary>
+        /// Verifies the adding a new user fails when user already exists.
+        /// </summary>
         [TestMethod]
         public void VerifyAddingANewUserFailsWhenUserAlreadyExists()
         {
@@ -116,6 +137,9 @@ namespace GooglesRival.Services.Tests
             Assert.IsFalse(sut);
         }
 
+        /// <summary>
+        /// Verifies the correct username and password after adding new user.
+        /// </summary>
         [TestMethod]
         [TestCategory("MockTests")]
         public void VerifyCorrectUsernameAndPasswordAfterAddingNewUser()
@@ -142,6 +166,9 @@ namespace GooglesRival.Services.Tests
             Assert.IsTrue(sut);
         }
 
+        /// <summary>
+        /// Verifies the correct username and incorrect password after adding new user.
+        /// </summary>
         [TestMethod]
         [TestCategory("MockTests")]
         public void VerifyCorrectUsernameAndIncorrectPasswordAfterAddingNewUser()
@@ -168,6 +195,9 @@ namespace GooglesRival.Services.Tests
             Assert.IsFalse(sut);
         }
 
+        /// <summary>
+        /// Verifies the change password when old password is correct.
+        /// </summary>
         [TestMethod]
         [TestCategory("MockTests")]
         public void VerifyChangePasswordWhenOldPasswordIsCorrect()
@@ -198,6 +228,9 @@ namespace GooglesRival.Services.Tests
             Assert.IsTrue(sut);
         }
 
+        /// <summary>
+        /// Verifies the change password fails when old password is incorrect.
+        /// </summary>
         [TestMethod]
         [TestCategory("MockTests")]
         public void VerifyChangePasswordFailsWhenOldPasswordIsIncorrect()
@@ -228,6 +261,9 @@ namespace GooglesRival.Services.Tests
             Assert.IsFalse(sut);
         }
 
+        /// <summary>
+        /// Verifies the change password fails when user doesnt exist.
+        /// </summary>
         [TestMethod]
         public void VerifyChangePasswordFailsWhenUserDoesntExist()
         {

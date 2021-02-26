@@ -10,6 +10,10 @@ namespace GooglesRival.Controllers
     using System.Data.SqlClient;
     using GooglesRival.Models;
 
+    /// <summary>
+    /// SQL Data Source.
+    /// </summary>
+    /// <seealso cref="GooglesRival.Controllers.IDataSource" />
     public class SQLDataSource : IDataSource
     {
         private readonly string server = "localhost\\SQLEXPRESS";
@@ -19,7 +23,7 @@ namespace GooglesRival.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="SQLDataSource"/> class.
         /// </summary>
-        /// <exception cref="Exception">Unable to connect to Database. Error: " + e.Message</exception>
+        /// <exception cref="Exception">Unable to connect to Database. Error: " + e.Message.</exception>
         public SQLDataSource()
         {
             string connectionString = "SERVER=" + this.server + ";" + "DATABASE=" +
@@ -38,7 +42,7 @@ namespace GooglesRival.Controllers
         /// <summary>
         /// Gets the users.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The Object.</returns>
         public List<User> GetUsers()
         {
             string query = "SELECT * FROM MyAPI_Users";
@@ -62,8 +66,11 @@ namespace GooglesRival.Controllers
         /// <summary>
         /// Updates the user.
         /// </summary>
-        /// <param name="theUser">The user.</param>
-        /// <returns></returns>
+        /// <param name="username">The username.</param>
+        /// <param name="password">The password.</param>
+        /// <returns>
+        /// The Object.
+        /// </returns>
         public bool UpdateUser(string username, string password)
         {
             SqlCommand command = this.connection.CreateCommand();
@@ -85,8 +92,11 @@ namespace GooglesRival.Controllers
         /// <summary>
         /// Adds the user.
         /// </summary>
-        /// <param name="theUser">The user.</param>
-        /// <returns></returns>
+        /// <param name="username">The username.</param>
+        /// <param name="password">The password.</param>
+        /// <returns>
+        /// The Object.
+        /// </returns>
         public bool AddUser(string username, string password)
         {
             SqlCommand command = this.connection.CreateCommand();
@@ -106,6 +116,12 @@ namespace GooglesRival.Controllers
             }
         }
 
+        /// <summary>
+        /// Gets the Messages.
+        /// </summary>
+        /// <returns>
+        /// The Object.
+        /// </returns>
         public List<Message> GetMessages()
         {
             string query = "SELECT * FROM MyAPI_Messages INNER JOIN MyAPI_Users ON MyAPI_Messages.MyAPI_Messages_UserID = MyAPI_Users.MyAPI_Users_ID";

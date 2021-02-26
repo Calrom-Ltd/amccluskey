@@ -9,21 +9,26 @@ namespace GooglesRival.Services
     using GooglesRival.Controllers;
     using GooglesRival.Models;
 
+    /// <summary>
+    /// Message Service.
+    /// </summary>
+    /// <seealso cref="GooglesRival.Services.IMessageService" />
     public class MessageService : IMessageService
     {
         /// <summary>
-        /// The messages
+        /// The messages.
         /// </summary>
         private readonly List<Message> messages = new List<Message>();
 
         /// <summary>
-        /// The data source
+        /// The data source.
         /// </summary>
         private readonly IDataSource dataSource;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MessageService"/> class.
+        /// Initializes a new instance of the <see cref="MessageService" /> class.
         /// </summary>
+        /// <param name="dataSource">The data source.</param>
         public MessageService(IDataSource dataSource)
         {
             this.dataSource = dataSource;
@@ -67,7 +72,7 @@ namespace GooglesRival.Services
         }
 
         /// <summary>
-        /// Initialises the specified message.
+        /// Initializes a new instance of the <see cref="MessageService"/> class.
         /// </summary>
         /// <param name="message">The message.</param>
         public MessageService(Message message)
@@ -76,9 +81,9 @@ namespace GooglesRival.Services
         }
 
         /// <summary>
-        /// Initialises the specified messages.
+        /// Initializes a new instance of the <see cref="MessageService"/> class.
         /// </summary>
-        /// <param name="_messages">The messages.</param>
+        /// <param name="messages">The messages.</param>
         public MessageService(List<Message> messages)
         {
             foreach (var message in messages)
@@ -91,7 +96,7 @@ namespace GooglesRival.Services
         /// Gets the messages for user.
         /// </summary>
         /// <param name="username">The username.</param>
-        /// <returns></returns>
+        /// <returns>The Object.</returns>
         public List<Message> GetMessagesForUser(string username)
         {
             var messages = this.dataSource.GetMessages();
@@ -102,7 +107,7 @@ namespace GooglesRival.Services
         /// Gets the message by identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>The Message Object.</returns>
         public Message GetMessageById(string id)
         {
             int messageId = int.Parse(id);

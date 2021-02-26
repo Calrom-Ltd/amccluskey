@@ -11,20 +11,28 @@ namespace GooglesRival.Services
     using GooglesRival.Models;
     using GooglesRival.Services.Iservices;
 
+    /// <summary>
+    /// Users Service.
+    /// </summary>
+    /// <seealso cref="GooglesRival.Services.Iservices.IUsersService" />
     public class UsersService : IUsersService
     {
         /// <summary>
-        /// The data source
+        /// The data source.
         /// </summary>
         private readonly IDataSource dataSource;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UsersService"/> class.
+        /// </summary>
         public UsersService()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UsersService"/> class.
+        /// Initializes a new instance of the <see cref="UsersService" /> class.
         /// </summary>
+        /// <param name="dataSource">The data source.</param>
         public UsersService(IDataSource dataSource)
         {
             this.dataSource = dataSource;
@@ -33,7 +41,7 @@ namespace GooglesRival.Services
         /// <summary>
         /// Gets all users.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The Object.</returns>
         public List<User> GetAllUsers()
         {
             return this.dataSource.GetUsers();
@@ -44,11 +52,11 @@ namespace GooglesRival.Services
         /// </summary>
         /// <param name="username">The username.</param>
         /// <param name="password">The password.</param>
-        /// <returns></returns>
+        /// <returns>The Object.</returns>
         /// <exception cref="System.ArgumentNullException">
         /// username
         /// or
-        /// password
+        /// password.
         /// </exception>
         public bool VerifyUsernameAndPassword(string username, string password)
         {
@@ -77,7 +85,7 @@ namespace GooglesRival.Services
         /// <param name="username">The username.</param>
         /// <param name="oldPassword">The old password.</param>
         /// <param name="newPassword">The new password.</param>
-        /// <returns></returns>
+        /// <returns>The Object.</returns>
         public bool ChangePassword(string username, string oldPassword, string newPassword)
         {
             var users = this.dataSource.GetUsers();
@@ -97,7 +105,7 @@ namespace GooglesRival.Services
         /// </summary>
         /// <param name="username">The username.</param>
         /// <param name="password">The password.</param>
-        /// <returns></returns>
+        /// <returns>The Object.</returns>
         public bool AddNewUser(string username, string password)
         {
             if (!this.DoesUserExist(username))
@@ -115,7 +123,7 @@ namespace GooglesRival.Services
         /// Doeses the user exist.
         /// </summary>
         /// <param name="username">The username.</param>
-        /// <returns></returns>
+        /// <returns>The Object.</returns>
         private bool DoesUserExist(string username)
         {
             try

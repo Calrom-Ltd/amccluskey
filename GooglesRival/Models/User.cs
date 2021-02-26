@@ -4,6 +4,9 @@
 
 namespace GooglesRival.Models
 {
+    /// <summary>
+    /// User Class.
+    /// </summary>
     public class User
     {
         /// <summary>

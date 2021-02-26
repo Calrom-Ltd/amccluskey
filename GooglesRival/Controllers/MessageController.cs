@@ -18,14 +18,14 @@ namespace GooglesRival.Controllers
     public class MessageController : ControllerBase
     {
         /// <summary>
-        /// The message service
+        /// The message service.
         /// </summary>
         private readonly IMessageService messageService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MessageController"/> class.
+        /// Initializes a new instance of the <see cref="MessageController" /> class.
         /// </summary>
-        /// <param name="logger">The logger.</param>
+        /// <param name="messageService">The message service.</param>
         public MessageController(IMessageService messageService)
         {
             this.messageService = messageService;
@@ -35,7 +35,7 @@ namespace GooglesRival.Controllers
         /// Gets the messages for user.
         /// </summary>
         /// <param name="username">The username.</param>
-        /// <returns></returns>
+        /// <returns>The Object.</returns>
         [HttpGet]
         [Route("GetMessagesForUser")]
         public IEnumerable<Message> GetMessagesForUser(string username)
@@ -47,7 +47,7 @@ namespace GooglesRival.Controllers
         /// Gets the single message.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>The Object.</returns>
         [HttpGet]
         [Route("GetMessageById")]
         public ActionResult<Message> GetSingleMessage(string id)
