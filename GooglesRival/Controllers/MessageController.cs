@@ -1,7 +1,6 @@
 ﻿using GooglesRival.Models;
 using GooglesRival.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 
 namespace GooglesRival.Controllers
@@ -15,11 +14,6 @@ namespace GooglesRival.Controllers
     public class MessageController : ControllerBase
     {
         /// <summary>
-        /// The logger
-        /// </summary>
-        private readonly ILogger<MessageController> _logger;
-
-        /// <summary>
         /// The message service
         /// </summary>
         private readonly IMessageService messageService;
@@ -28,9 +22,8 @@ namespace GooglesRival.Controllers
         /// Initializes a new instance of the <see cref="MessageController"/> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
-        public MessageController(ILogger<MessageController> logger, IMessageService messageService)
+        public MessageController(IMessageService messageService)
         {
-            _logger = logger;
             this.messageService = messageService;
         }
 

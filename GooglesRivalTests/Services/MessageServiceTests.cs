@@ -23,7 +23,7 @@ namespace GooglesRivalTests
                 Username = "Admin",
                 Date = DateTime.Parse("01-01-2021"),
                 Subject = "Test",
-                body = "Testing that this works",
+                Body = "Testing that this works",
             };
             //// Act
             var sut = messageService.GetMessageById("1");
@@ -33,7 +33,7 @@ namespace GooglesRivalTests
             Assert.AreEqual(message.Id, sut.Id);
             Assert.AreEqual(message.Username, sut.Username);
             Assert.AreEqual(message.Subject, sut.Subject);
-            Assert.AreEqual(message.body, sut.body);
+            Assert.AreEqual(message.Body, sut.Body);
             Assert.AreEqual(message.Date, sut.Date);
         }
 
@@ -53,7 +53,7 @@ namespace GooglesRivalTests
                 Username = "Admin",
                 Date = DateTime.Parse("01-01-2021"),
                 Subject = "Test",
-                body = "Testing that this works",
+                Body = "Testing that this works",
             };
             //// Act
             var sut = messageService.GetMessagesForUser("Admin");
@@ -64,7 +64,7 @@ namespace GooglesRivalTests
             Assert.AreEqual(message.Id, sut[0].Id);
             Assert.AreEqual(message.Username, sut[0].Username);
             Assert.AreEqual(message.Subject, sut[0].Subject);
-            Assert.AreEqual(message.body, sut[0].body);
+            Assert.AreEqual(message.Body, sut[0].Body);
             Assert.AreEqual(message.Date, sut[0].Date);
         }
 

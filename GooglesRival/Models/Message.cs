@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GooglesRival.Models
 {
@@ -45,6 +42,6 @@ namespace GooglesRival.Models
         /// <value>
         /// The body.
         /// </value>
-        public string body { get; set; }
+        public string Body { get; set; }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using GooglesRival.Models;
 using GooglesRival.Services.Iservices;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 
 namespace GooglesRival.Controllers
@@ -10,13 +9,10 @@ namespace GooglesRival.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly ILogger<UserController> _logger;
-
         private readonly IUsersService usersService;
 
-        public UserController(ILogger<UserController> logger, IUsersService usersService)
+        public UserController(IUsersService usersService)
         {
-            _logger = logger;
             this.usersService = usersService;
         }
         

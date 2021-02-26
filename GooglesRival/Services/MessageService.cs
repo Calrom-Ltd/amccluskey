@@ -11,7 +11,7 @@ namespace GooglesRival.Services
         /// <summary>
         /// The messages
         /// </summary>
-        private List<Message> messages = new List<Message>();
+        private readonly List<Message> messages = new List<Message>();
 
         /// <summary>
         /// The data source
@@ -108,7 +108,7 @@ namespace GooglesRival.Services
                 var output = dataSource.GetMessages().Single(msg => msg.Id.Equals(MessageId));
                 return output;
             }
-            catch (Exception e)
+            catch
             {
                 return null;
             }

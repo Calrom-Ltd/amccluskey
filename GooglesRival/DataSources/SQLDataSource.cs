@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
 using GooglesRival.Models;
 using System.Data;
@@ -119,7 +117,7 @@ namespace GooglesRival.Controllers
                     Username = reader.GetString("MyAPI_Users_Username"),
                     Date = reader.GetDateTime("MyAPI_Messages_Date"),
                     Subject = reader.GetString("MyAPI_Messages_Subject"),
-                    body = reader.GetString("MyAPI_Messages_Body"),
+                    Body = reader.GetString("MyAPI_Messages_Body"),
                 });
             }
             reader.Close();
