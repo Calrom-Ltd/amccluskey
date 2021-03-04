@@ -160,6 +160,56 @@
             The Object.
             </returns>
         </member>
+        <member name="T:GooglesRival.DataSources.MongoDbSource">
+            <summary>
+            Mongo Db Source.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.DataSources.MongoDbSource.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:GooglesRival.DataSources.MongoDbSource"/> class.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.DataSources.MongoDbSource.AddUser(System.String,System.String)">
+            <summary>
+            Adds the user.
+            </summary>
+            <param name="username">The username.</param>
+            <param name="password">The password.</param>
+            <returns>
+            The Object.
+            </returns>
+            <exception cref="T:System.NotImplementedException">Exception.</exception>
+        </member>
+        <member name="M:GooglesRival.DataSources.MongoDbSource.GetMessages">
+            <summary>
+            Gets the Messages.
+            </summary>
+            <returns>
+            The Object.
+            </returns>
+            <exception cref="T:System.NotImplementedException">Exception.</exception>
+        </member>
+        <member name="M:GooglesRival.DataSources.MongoDbSource.GetUsers">
+            <summary>
+            Gets the users.
+            </summary>
+            <returns>
+            The Object.
+            </returns>
+            <exception cref="T:System.NotImplementedException">Exception.</exception>
+        </member>
+        <member name="M:GooglesRival.DataSources.MongoDbSource.UpdateUser(System.String,System.String)">
+            <summary>
+            Updates the user.
+            </summary>
+            <param name="username">The username.</param>
+            <param name="password">The password.</param>
+            <returns>
+            The Object.
+            </returns>
+            <exception cref="T:System.NotImplementedException">Exception.</exception>
+        </member>
         <member name="T:GooglesRival.Models.Message">
             <summary>
             Message Class.
