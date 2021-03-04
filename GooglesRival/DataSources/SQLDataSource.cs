@@ -26,16 +26,26 @@ namespace GooglesRival.Controllers
         /// <exception cref="Exception">Unable to connect to Database. Error: " + e.Message.</exception>
         public SqlDataSource()
         {
-            string connectionString = "SERVER=" + this.server + ";" + "DATABASE=" +
-            this.database + ";Integrated Security=true;";
-            this.connection = new SqlConnection(connectionString);
+            string connectionString = string.Empty;
+            if (Environment.GetEnvironmentVariable("ConnectionString") == null)
+            {
+                connectionString = "SERVER=" + this.server + ";" + "DATABASE=" + this.database;
+                connectionString += ";Integrated Security=true;";
+            }
+            else
+            {
+                connectionString = Environment.GetEnvironmentVariable("ConnectionString");
+            }
+
             try
             {
+                this.connection = new SqlConnection(connectionString);
                 this.connection.Open();
             }
             catch (Exception e)
             {
-                Console.WriteLine("Unable to connect to Database. Error: " + e.Message);
+                Console.WriteLine(Environment.GetEnvironmentVariable("ConnectionString"));
+                Console.WriteLine($"Unable to connect to Database. Connection String: {connectionString + Environment.NewLine+ Environment.NewLine } Error: " + e.Message);
                 throw;
             }
         }
