@@ -48,7 +48,7 @@ namespace GooglesRival
         {
             services.AddSingleton<IUsersService, UsersService>();
             services.AddSingleton<IMessageService, MessageService>();
-            services.AddSingleton<IDataSource, MongoDbSource>();
+            services.AddSingleton<IDataSource, SqlDataSource>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

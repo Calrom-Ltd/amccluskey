@@ -354,11 +354,6 @@
             </summary>
             <seealso cref="T:GooglesRival.Services.IMessageService" />
         </member>
-        <member name="F:GooglesRival.Services.MessageService.messages">
-            <summary>
-            The messages.
-            </summary>
-        </member>
         <member name="F:GooglesRival.Services.MessageService.dataSource">
             <summary>
             The data source.
@@ -369,18 +364,6 @@
             Initializes a new instance of the <see cref="T:GooglesRival.Services.MessageService" /> class.
             </summary>
             <param name="dataSource">The data source.</param>
-        </member>
-        <member name="M:GooglesRival.Services.MessageService.#ctor(GooglesRival.Models.Message)">
-            <summary>
-            Initializes a new instance of the <see cref="T:GooglesRival.Services.MessageService"/> class.
-            </summary>
-            <param name="message">The message.</param>
-        </member>
-        <member name="M:GooglesRival.Services.MessageService.#ctor(System.Collections.Generic.List{GooglesRival.Models.Message})">
-            <summary>
-            Initializes a new instance of the <see cref="T:GooglesRival.Services.MessageService"/> class.
-            </summary>
-            <param name="messages">The messages.</param>
         </member>
         <member name="M:GooglesRival.Services.MessageService.GetMessagesForUser(System.String)">
             <summary>
@@ -395,6 +378,21 @@
             </summary>
             <param name="id">The identifier.</param>
             <returns>The Message Object.</returns>
+        </member>
+        <member name="M:GooglesRival.Services.MessageService.GetFromProxyAsync(System.Uri)">
+            <summary>
+            Gets from proxy asynchronous.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="messageId">The message identifier.</param>
+            <returns>object.</returns>
+        </member>
+        <member name="M:GooglesRival.Services.MessageService.ConvertJsonToMessage(System.String)">
+            <summary>
+            Converts the json to message.
+            </summary>
+            <param name="input">The input.</param>
+            <returns></returns>
         </member>
         <member name="T:GooglesRival.Services.UsersService">
             <summary>

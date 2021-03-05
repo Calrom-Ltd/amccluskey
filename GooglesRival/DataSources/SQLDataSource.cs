@@ -1,4 +1,4 @@
-﻿// <copyright file="SqlDataSource.cs" company="Adam's Awesome API">
+﻿// <copyright file="SQLDataSource.cs" company="Adam's Awesome API">
 // Copyright (c) Adam's Awesome API. All rights reserved.
 // </copyright>
 
@@ -8,6 +8,7 @@ namespace GooglesRival.Controllers
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
+    using System.Diagnostics.CodeAnalysis;
     using GooglesRival.Models;
 
     /// <summary>
@@ -82,6 +83,7 @@ namespace GooglesRival.Controllers
         /// <returns>
         /// The Object.
         /// </returns>
+        [ExcludeFromCodeCoverage]
         public bool UpdateUser(string username, string password)
         {
             SqlCommand command = this.connection.CreateCommand();
@@ -108,6 +110,7 @@ namespace GooglesRival.Controllers
         /// <returns>
         /// The Object.
         /// </returns>
+        [ExcludeFromCodeCoverage]
         public bool AddUser(string username, string password)
         {
             SqlCommand command = this.connection.CreateCommand();

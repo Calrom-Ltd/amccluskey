@@ -5,10 +5,12 @@
 namespace GooglesRivalTests
 {
     using System;
+    using System.Threading.Tasks;
     using GooglesRival.Controllers;
     using GooglesRival.Models;
     using GooglesRival.Services;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
 
     /// <summary>
     /// Messages Service Tests.
@@ -19,9 +21,10 @@ namespace GooglesRivalTests
         /// <summary>
         /// Verifies the messages details correct.
         /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
         [TestCategory("Demo")]
-        public void VerifyMessagesDetailsCorrect()
+        public async Task VerifyMessagesDetailsCorrectAsync()
         {
             //// Setup
             IDataSource dataSource = new SqlDataSource();
@@ -35,7 +38,7 @@ namespace GooglesRivalTests
                 Body = "Testing that this works",
             };
             //// Act
-            var sut = messageService.GetMessageById("1");
+            var sut = await messageService.GetMessageById("1");
 
             //// Assert
             Assert.IsNotNull(sut);
@@ -44,6 +47,36 @@ namespace GooglesRivalTests
             Assert.AreEqual(message.Subject, sut.Subject);
             Assert.AreEqual(message.Body, sut.Body);
             Assert.AreEqual(message.Date, sut.Date);
+        }
+
+        /// <summary>
+        /// Verifies the messages details correct.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
+        [TestMethod]
+        [TestCategory("Demo")]
+        public async Task VerifyMessagesReturnedForInvalidMessageIDAsync()
+        {
+            //// Setup
+            Mock<IDataSource> mDataSource = new Mock<IDataSource>();
+            mDataSource.Setup(data => data.GetMessages()).Throws(new Exception("Sequence contains no matching element"));
+            var messageService = new MessageService(mDataSource.Object);
+            Message message = new Message()
+            {
+                Id = 99,
+                Username = "TobyT",
+                Date = DateTime.Parse("01-01-2021"),
+            };
+            //// Act
+            var sut = await messageService.GetMessageById("99");
+
+            //// Assert
+            Assert.IsNotNull(sut);
+            Assert.AreEqual(message.Id, sut.Id);
+            Assert.AreEqual(message.Username, sut.Username);
+            Assert.AreNotEqual(string.Empty, sut.Subject);
+            Assert.AreNotEqual(string.Empty, sut.Body);
+            Assert.AreNotEqual(string.Empty, sut.Date);
         }
 
         /// <summary>
@@ -69,7 +102,7 @@ namespace GooglesRivalTests
 
             //// Assert
             Assert.IsNotNull(sut);
-            Assert.AreEqual(1, sut.Count);
+            Assert.AreNotEqual(0, sut.Count);
             Assert.AreEqual(message.Id, sut[0].Id);
             Assert.AreEqual(message.Username, sut[0].Username);
             Assert.AreEqual(message.Subject, sut[0].Subject);
@@ -94,24 +127,6 @@ namespace GooglesRivalTests
             //// Assert
             Assert.IsNotNull(sut);
             Assert.AreEqual(0, sut.Count);
-        }
-
-        /// <summary>
-        /// Verifies the no message is returned for in valid message identifier.
-        /// </summary>
-        [TestMethod]
-        [TestCategory("Demo")]
-        public void VerifyNoMessageIsReturnedForInValidMessageID()
-        {
-            //// Setup
-            IDataSource dataSource = new SqlDataSource();
-            var messageService = new MessageService(dataSource);
-
-            //// Act
-            var sut = messageService.GetMessageById("-1");
-
-            //// Assert
-            Assert.IsNull(sut);
         }
     }
 }

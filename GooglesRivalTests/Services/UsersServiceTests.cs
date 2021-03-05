@@ -6,6 +6,7 @@ namespace GooglesRival.Services.Tests
 {
     using System.Collections.Generic;
     using GooglesRival.Controllers;
+    using GooglesRival.DataSources;
     using GooglesRival.Models;
     using GooglesRival.Services;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -21,10 +22,28 @@ namespace GooglesRival.Services.Tests
         /// Gets all users test.
         /// </summary>
         [TestMethod]
-        public void GetAllUsersTest()
+        public void GetAllUsersFromSQLTest()
         {
             //// Setup
             IDataSource dataSource = new SqlDataSource();
+            var service = new UsersService(dataSource);
+
+            //// Act
+            var sut = service.GetAllUsers();
+
+            ////Assert
+            Assert.IsNotNull(sut);
+            Assert.AreNotEqual(0, sut.Count);
+        }
+
+        /// <summary>
+        /// Gets all users test.
+        /// </summary>
+        [TestMethod]
+        public void GetAllUsersFromMongoTest()
+        {
+            //// Setup
+            IDataSource dataSource = new MongoDbSource();
             var service = new UsersService(dataSource);
 
             //// Act
@@ -51,6 +70,75 @@ namespace GooglesRival.Services.Tests
             ////Assert
             Assert.IsNotNull(sut);
             Assert.IsTrue(sut);
+        }
+
+        /// <summary>
+        /// Verifies the correct username and password.
+        /// </summary>
+        [TestMethod]
+        public void VerifyNullUsernameAndPasswordThrowsException()
+        {
+            try
+            {
+                //// Setup
+                IDataSource dataSource = new SqlDataSource();
+                var service = new UsersService(dataSource);
+
+                //// Act
+                var sut = service.VerifyUsernameAndPassword(null, null);
+                Assert.Fail("No Exception Thrown");
+            }
+            catch (System.Exception ex)
+            {
+                ////Assert
+                Assert.IsNotNull(ex.Message, "Exception message should not be null");
+            }
+        }
+
+        /// <summary>
+        /// Verifies the correct username and password.
+        /// </summary>
+        [TestMethod]
+        public void VerifyNullUsernameOnlyThrowsException()
+        {
+            try
+            {
+                //// Setup
+                IDataSource dataSource = new SqlDataSource();
+                var service = new UsersService(dataSource);
+
+                //// Act
+                var sut = service.VerifyUsernameAndPassword(null, "Test");
+                Assert.Fail("No Exception Thrown");
+            }
+            catch (System.Exception ex)
+            {
+                ////Assert
+                Assert.IsNotNull(ex.Message, "Exception message should not be null");
+            }
+        }
+
+        /// <summary>
+        /// Verifies the correct username and password.
+        /// </summary>
+        [TestMethod]
+        public void VerifyNullPasswordOnlyThrowsException()
+        {
+            try
+            {
+                //// Setup
+                IDataSource dataSource = new SqlDataSource();
+                var service = new UsersService(dataSource);
+
+                //// Act
+                var sut = service.VerifyUsernameAndPassword("Test", null);
+                Assert.Fail("No Exception Thrown");
+            }
+            catch (System.Exception ex)
+            {
+                ////Assert
+                Assert.IsNotNull(ex.Message, "Exception message should not be null");
+            }
         }
 
         /// <summary>

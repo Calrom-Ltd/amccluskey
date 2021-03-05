@@ -4,15 +4,32 @@
         <name>GooglesRivalTests</name>
     </assembly>
     <members>
+        <member name="T:GooglesRivalTests.Services.DataSourceTest">
+            <summary>
+            SQL Data Source tests.
+            </summary>
+        </member>
+        <member name="M:GooglesRivalTests.Services.DataSourceTest.ThrowExceptionWhenConnectionStringIsInvalid">
+            <summary>
+            Gets all users test.
+            </summary>
+        </member>
         <member name="T:GooglesRivalTests.MessageServiceTests">
             <summary>
             Messages Service Tests.
             </summary>
         </member>
-        <member name="M:GooglesRivalTests.MessageServiceTests.VerifyMessagesDetailsCorrect">
+        <member name="M:GooglesRivalTests.MessageServiceTests.VerifyMessagesDetailsCorrectAsync">
             <summary>
             Verifies the messages details correct.
             </summary>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous unit test.</returns>
+        </member>
+        <member name="M:GooglesRivalTests.MessageServiceTests.VerifyMessagesReturnedForInvalidMessageIDAsync">
+            <summary>
+            Verifies the messages details correct.
+            </summary>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous unit test.</returns>
         </member>
         <member name="M:GooglesRivalTests.MessageServiceTests.VerifyMessageIsReturnedForValidUsername">
             <summary>
@@ -24,22 +41,37 @@
             Verifies the no message is returned for in valid username.
             </summary>
         </member>
-        <member name="M:GooglesRivalTests.MessageServiceTests.VerifyNoMessageIsReturnedForInValidMessageID">
-            <summary>
-            Verifies the no message is returned for in valid message identifier.
-            </summary>
-        </member>
         <member name="T:GooglesRival.Services.Tests.UsersServiceTests">
             <summary>
             Users Service Tests.
             </summary>
         </member>
-        <member name="M:GooglesRival.Services.Tests.UsersServiceTests.GetAllUsersTest">
+        <member name="M:GooglesRival.Services.Tests.UsersServiceTests.GetAllUsersFromSQLTest">
+            <summary>
+            Gets all users test.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.Services.Tests.UsersServiceTests.GetAllUsersFromMongoTest">
             <summary>
             Gets all users test.
             </summary>
         </member>
         <member name="M:GooglesRival.Services.Tests.UsersServiceTests.VerifyCorrectUsernameAndPassword">
+            <summary>
+            Verifies the correct username and password.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.Services.Tests.UsersServiceTests.VerifyNullUsernameAndPasswordThrowsException">
+            <summary>
+            Verifies the correct username and password.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.Services.Tests.UsersServiceTests.VerifyNullUsernameOnlyThrowsException">
+            <summary>
+            Verifies the correct username and password.
+            </summary>
+        </member>
+        <member name="M:GooglesRival.Services.Tests.UsersServiceTests.VerifyNullPasswordOnlyThrowsException">
             <summary>
             Verifies the correct username and password.
             </summary>
