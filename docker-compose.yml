@@ -14,7 +14,7 @@ services:
         environment: 
             ASPNETCORE_ENVIRONMENT: Development
             ConnectionString: SERVER=sqldata;DATABASE=MyAPI;User ID=sa;Password=Pass@word;
-        image: test
+        image: calromamccluskey/trainingmyapi
         restart: on-failure
         ports:
               - 8123:80
