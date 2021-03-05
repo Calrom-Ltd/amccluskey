@@ -4,6 +4,9 @@
 
 namespace GooglesRival.Models
 {
+    using MongoDB.Bson;
+    using MongoDB.Bson.Serialization.Attributes;
+
     /// <summary>
     /// User Class.
     /// </summary>
@@ -24,5 +27,8 @@ namespace GooglesRival.Models
         /// The password.
         /// </value>
         public string Password { get; set; }
+
+        [BsonId]
+        private ObjectId _Id { get; set; }
     }
 }

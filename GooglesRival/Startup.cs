@@ -6,6 +6,7 @@ namespace GooglesRival
 {
     using System.Diagnostics.CodeAnalysis;
     using GooglesRival.Controllers;
+    using GooglesRival.DataSources;
     using GooglesRival.Services;
     using GooglesRival.Services.Iservices;
     using Microsoft.AspNetCore.Builder;
@@ -47,7 +48,7 @@ namespace GooglesRival
         {
             services.AddSingleton<IUsersService, UsersService>();
             services.AddSingleton<IMessageService, MessageService>();
-            services.AddSingleton<IDataSource, SqlDataSource>();
+            services.AddSingleton<IDataSource, MongoDbSource>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

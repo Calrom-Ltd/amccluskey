@@ -5,6 +5,8 @@
 namespace GooglesRival.Models
 {
     using System;
+    using MongoDB.Bson;
+    using MongoDB.Bson.Serialization.Attributes;
 
     /// <summary>
     /// Message Class.
@@ -50,5 +52,8 @@ namespace GooglesRival.Models
         /// The body.
         /// </value>
         public string Body { get; set; }
+
+        [BsonId]
+        private ObjectId _Id { get; set; }
     }
 }

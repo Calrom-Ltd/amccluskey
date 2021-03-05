@@ -15,13 +15,15 @@ namespace GooglesRival.DataSources
     /// </summary>
     public class MongoDbSource : IDataSource
     {
+        private readonly IMongoDatabase db;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MongoDbSource"/> class.
         /// </summary>
         public MongoDbSource()
         {
             MongoClient client = new MongoClient("mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false");
-            var dbList = client.ListDatabases().ToList();
+            this.db = client.GetDatabase("MyAPI");
         }
 
         /// <summary>
@@ -35,7 +37,20 @@ namespace GooglesRival.DataSources
         /// <exception cref="NotImplementedException">Exception.</exception>
         public bool AddUser(string username, string password)
         {
-            throw new NotImplementedException();
+            User newUser = new User()
+            {
+                Username = username,
+                Password = password,
+            };
+            try
+            {
+                this.db.GetCollection<User>("MyAPI_Users").InsertOne(newUser);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -47,7 +62,7 @@ namespace GooglesRival.DataSources
         /// <exception cref="NotImplementedException">Exception.</exception>
         public List<Message> GetMessages()
         {
-            throw new NotImplementedException();
+            return this.db.GetCollection<Message>("MyAPI_Messages").Find(_ => true).ToList();
         }
 
         /// <summary>
@@ -56,10 +71,9 @@ namespace GooglesRival.DataSources
         /// <returns>
         /// The Object.
         /// </returns>
-        /// <exception cref="NotImplementedException">Exception.</exception>
         public List<User> GetUsers()
         {
-            throw new NotImplementedException();
+            return this.db.GetCollection<User>("MyAPI_Users").Find(_ => true).ToList();
         }
 
         /// <summary>
@@ -73,7 +87,18 @@ namespace GooglesRival.DataSources
         /// <exception cref="NotImplementedException">Exception.</exception>
         public bool UpdateUser(string username, string password)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var collection = this.db.GetCollection<User>("MyAPI_Users");
+                var theUser = collection.Find(user => user.Username == username).First();
+                theUser.Password = password;
+                collection.ReplaceOne(x => x.Username == username, theUser);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
