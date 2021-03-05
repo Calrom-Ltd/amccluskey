@@ -4,10 +4,14 @@
 
 namespace GooglesRival.Services
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Http;
+    using System.Threading.Tasks;
     using GooglesRival.Controllers;
     using GooglesRival.Models;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// Message Service.
@@ -15,11 +19,6 @@ namespace GooglesRival.Services
     /// <seealso cref="GooglesRival.Services.IMessageService" />
     public class MessageService : IMessageService
     {
-        /// <summary>
-        /// The messages.
-        /// </summary>
-        private readonly List<Message> messages = new List<Message>();
-
         /// <summary>
         /// The data source.
         /// </summary>
@@ -32,64 +31,6 @@ namespace GooglesRival.Services
         public MessageService(IDataSource dataSource)
         {
             this.dataSource = dataSource;
-            ////int uniqueMessageCount = 0;
-            ////////Every user gets this one
-            ////for (int i = 0; i < 10; i++)
-            ////{
-            ////    Message tempMessage = new Message();
-            ////    tempMessage.Id = uniqueMessageCount;
-            ////    uniqueMessageCount++;
-            ////    tempMessage.Username = $"User{i}";
-            ////    tempMessage.Date = DateTime.Now;
-            ////    tempMessage.Subject = "Hey Kids, have you heard of Rick rolling?";
-            ////    tempMessage.body = "Haha Press F to Pay respects :-P";
-            ////    messages.Add(tempMessage);
-            ////}
-
-            ////////Every other user gets this one
-            ////for (int i = 0; i < 10; i++)
-            ////{
-            ////    Message tempMessage = new Message();
-            ////    tempMessage.Id = uniqueMessageCount;
-            ////    uniqueMessageCount++;
-            ////    tempMessage.Username = $"User{i}";
-            ////    tempMessage.Date = DateTime.Now;
-            ////    tempMessage.Subject = "Hey Steam?";
-            ////    tempMessage.body = "Nobody: ... Fry: Shut up and take my money";
-            ////    messages.Add(tempMessage);
-            ////    i++;
-            ////}
-
-            ////////The Last user gets this one
-            ////Message lastMessage = new Message();
-            ////lastMessage.Id = uniqueMessageCount;
-            ////uniqueMessageCount++;
-            ////lastMessage.Username = $"User10";
-            ////lastMessage.Date = DateTime.Now;
-            ////lastMessage.Subject = "Fed up of memes?";
-            ////lastMessage.body = "...Crickets...";
-            ////messages.Add(lastMessage);
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MessageService"/> class.
-        /// </summary>
-        /// <param name="message">The message.</param>
-        public MessageService(Message message)
-        {
-            this.messages.Add(message);
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MessageService"/> class.
-        /// </summary>
-        /// <param name="messages">The messages.</param>
-        public MessageService(List<Message> messages)
-        {
-            foreach (var message in messages)
-            {
-                this.messages.Add(message);
-            }
         }
 
         /// <summary>
@@ -108,7 +49,7 @@ namespace GooglesRival.Services
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>The Message Object.</returns>
-        public Message GetMessageById(string id)
+        public async Task<Message> GetMessageById(string id)
         {
             int messageId = int.Parse(id);
             try
@@ -116,10 +57,60 @@ namespace GooglesRival.Services
                 var output = this.dataSource.GetMessages().Single(msg => msg.Id.Equals(messageId));
                 return output;
             }
-            catch
+            catch (Exception ex)
             {
-                return null;
+                if (ex.Message.Contains("Sequence contains no matching element"))
+                {
+                    //// Call to https://jsonplaceholder.typicode.com/posts/1 to get the response from there...
+                    string uriToAccess = "https://jsonplaceholder.typicode.com/posts/";
+                    uriToAccess += messageId.ToString();
+                    string response = await GetFromProxyAsync(new Uri(uriToAccess));
+                    return this.ConvertJsonToMessage(response);
+                }
+                else
+                {
+                    return null;
+                }
             }
+        }
+
+        /// <summary>
+        /// Gets from proxy asynchronous.
+        /// </summary>
+        /// <param name="uriToAccess">The URI to access.</param>
+        /// <returns>
+        /// object.
+        /// </returns>
+        private static async Task<string> GetFromProxyAsync(Uri uriToAccess)
+        {
+            var httpClient = new HttpClient();
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, uriToAccess);
+            httpClient.BaseAddress = uriToAccess;
+            var response = httpClient.SendAsync(httpRequest);
+            var myResult = await response.Result.Content.ReadAsStringAsync().ConfigureAwait(false);
+            httpClient.Dispose();
+            return myResult;
+        }
+
+        /// <summary>
+        /// Converts the json to message.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <returns>The Parsed json.</returns>
+        private Message ConvertJsonToMessage(string input)
+        {
+            var message = new Message()
+            {
+                Date = DateTime.Now,
+                Username = "TobyT",
+            };
+
+            Dictionary<string, string> dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(input);
+            string output = string.Empty;
+            message.Id = dictionary.TryGetValue("id", out output) ? int.Parse(output) : 0;
+            message.Subject = dictionary.TryGetValue("title", out output) ? output : string.Empty;
+            message.Body = dictionary.TryGetValue("body", out output) ? output : string.Empty;
+            return message;
         }
     }
 }

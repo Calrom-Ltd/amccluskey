@@ -5,6 +5,8 @@
 namespace GooglesRival.Controllers
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Threading.Tasks;
     using GooglesRival.Models;
     using GooglesRival.Services;
     using Microsoft.AspNetCore.Mvc;
@@ -15,6 +17,7 @@ namespace GooglesRival.Controllers
     /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
     [ApiController]
     [Route("[controller]")]
+    [ExcludeFromCodeCoverage]
     public class MessageController : ControllerBase
     {
         /// <summary>
@@ -50,9 +53,9 @@ namespace GooglesRival.Controllers
         /// <returns>The Object.</returns>
         [HttpGet]
         [Route("GetMessageById")]
-        public ActionResult<Message> GetSingleMessage(string id)
+        public async Task<ActionResult<Message>> GetSingleMessage(string id)
         {
-            return this.Ok(this.messageService.GetMessageById(id));
+            return this.Ok(await this.messageService.GetMessageById(id));
         }
     }
 }
