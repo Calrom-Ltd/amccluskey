@@ -7,6 +7,9 @@ services:
           - ACCEPT_EULA=Y
         ports:
           - 5434:1433
+        container_name: db_Container
+        volumes:
+            - dbVolume:/var/opt/mssql
     googlesrival:
         build: 
             context: .
@@ -14,7 +17,7 @@ services:
         environment: 
             ASPNETCORE_ENVIRONMENT: Development
             ConnectionString: SERVER=sqldata;DATABASE=MyAPI;User ID=sa;Password=Pass@word;
-        image: test
+        image: calromamccluskey/trainingmyapi
         restart: on-failure
         ports:
               - 8123:80
@@ -24,3 +27,5 @@ services:
 networks:
     default:
         name: google_default
+volumes:
+    dbVolume:

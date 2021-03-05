@@ -26,7 +26,7 @@ namespace GooglesRival.Controllers
         /// <exception cref="Exception">Unable to connect to Database. Error: " + e.Message.</exception>
         public SqlDataSource()
         {
-            string connectionString = string.Empty;
+            string connectionString;
             if (Environment.GetEnvironmentVariable("ConnectionString") == null)
             {
                 connectionString = "SERVER=" + this.server + ";" + "DATABASE=" + this.database;
@@ -45,7 +45,7 @@ namespace GooglesRival.Controllers
             catch (Exception e)
             {
                 Console.WriteLine(Environment.GetEnvironmentVariable("ConnectionString"));
-                Console.WriteLine($"Unable to connect to Database. Connection String: {connectionString + Environment.NewLine+ Environment.NewLine } Error: " + e.Message);
+                Console.WriteLine($"Unable to connect to Database. Connection String: {connectionString + Environment.NewLine + Environment.NewLine} Error: " + e.Message);
                 throw;
             }
         }
