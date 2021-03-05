@@ -383,16 +383,17 @@
             <summary>
             Gets from proxy asynchronous.
             </summary>
-            <typeparam name="T"></typeparam>
-            <param name="messageId">The message identifier.</param>
-            <returns>object.</returns>
+            <param name="uriToAccess">The URI to access.</param>
+            <returns>
+            object.
+            </returns>
         </member>
         <member name="M:GooglesRival.Services.MessageService.ConvertJsonToMessage(System.String)">
             <summary>
             Converts the json to message.
             </summary>
             <param name="input">The input.</param>
-            <returns></returns>
+            <returns>The Parsed json.</returns>
         </member>
         <member name="T:GooglesRival.Services.UsersService">
             <summary>
