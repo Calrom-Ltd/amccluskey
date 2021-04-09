@@ -1,1 +1,63 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    margin-top: 0px;
+    background-color: rgb(255,200,200);
+    width: 100%;
+    margin-left: 0px;
+  }
+a.whiteOnly{
+    color: #fff;
+    text-decoration: none;
+}
+  a {
+    margin-top: 0px;
+    font-size: 20px;
+    vertical-align: top;
+    display: inline;
+    padding: 8px;
+    color: rgb(255,0,0);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  th {
+    color: #800;
+    background: #fca;
+    font-size: 30px;
+    padding-right: 15px;
+  }
+  table{
+    background-color: rgb(255, 255, 238);
+    border-spacing: inherit;
+    border-radius: 8px;
+    font-size: 20px;
+  }
+  tr:nth-child(even) {
+    background: #CCC
+  }
+  div.body{
+      margin-left: 10px;
+  }
+td {
+    padding-left: 5px;
+}
+button {
+    border: none;
+    border-radius: 8px;
+    color: #FFF;
+    background-color: #090;
+    padding: 12px 20px;
+}
+label {
+    padding: 0px 12px 0px 0px;
+    display: inline-block;
+    width:10%;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  input[type=text],input[type=password], select, textarea{
+    width: 40%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+    margin-top: 5px;
+  }

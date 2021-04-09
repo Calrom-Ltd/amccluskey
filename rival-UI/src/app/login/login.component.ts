@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   }
 
   Login(): void {    
-     this.userService.postUser(this.username.nativeElement.value, this.password.nativeElement.value).subscribe(data => this.status = data);
-  }
+    this.userService.postUser(this.username.nativeElement.value, this.password.nativeElement.value).subscribe(data => this.status = data);
+ }
 }
 

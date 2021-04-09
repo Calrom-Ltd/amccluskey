@@ -1,0 +1,23 @@
+div, a{
+    margin-top: 0px;
+}
+h1{
+    color: #FFF;
+    display: inline;
+}
+ul{
+    display: inline;
+}
+li {
+    display: inline;
+  }
+div.header{
+    background-color: #000;
+    width: 100%;
+  }
+  li a{
+    background-color: #000;  
+  }
+  li a:hover {
+    background-color: #333;
+  }
