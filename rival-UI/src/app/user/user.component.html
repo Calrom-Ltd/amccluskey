@@ -1,1 +1,16 @@
-<p>user works!</p>
+<h1>User</h1>
+<a routerLink="/changePassword">
+    Change A Password
+</a>
+<h2>Users List</h2>
+  <table>
+    <tr>
+      <td>Username</td>
+      <td>Password</td>
+    </tr>
+    <tr *ngFor = "let user of users">
+      <td>
+        {{user.username}}</td>
+      <td>{{user.password}}</td>
+    </tr>
+  </table>
