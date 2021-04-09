@@ -25,5 +25,11 @@ namespace GooglesRival.Services
         /// <param name="username">The username.</param>
         /// <returns>The Object.</returns>
         List<Message> GetMessagesForUser(string username);
+
+        /// <summary>
+        /// Gets all messages.
+        /// </summary>
+        /// <returns>The Object.</returns>
+        List<Message> GetAllMessages();
     }
 }

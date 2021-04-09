@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { MessageService } from '../message.service';
+import { Message } from '../message';
 
 @Component({
   selector: 'app-message',
@@ -6,10 +9,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./message.component.css']
 })
 export class MessageComponent implements OnInit {
+  messages: Message[]=[]
 
-  constructor() { }
+  constructor(private route: ActivatedRoute, private MessageService: MessageService) { }
 
   ngOnInit(): void {
+    this.getMessages();
   }
 
+  getMessages(): void {
+    this.MessageService.getMessages()
+      .subscribe(messages => this.messages = messages);
+  }
 }

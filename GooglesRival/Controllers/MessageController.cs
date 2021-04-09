@@ -54,5 +54,17 @@ namespace GooglesRival.Controllers
         {
             return this.Ok(this.messageService.GetMessageById(id));
         }
+
+        /// <summary>
+        /// Gets the single message.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>The Object.</returns>
+        [HttpGet]
+        [Route("GetMessages")]
+        public ActionResult<Message> GetMessages()
+        {
+            return this.Ok(this.messageService.GetAllMessages());
+        }
     }
 }

@@ -121,5 +121,15 @@ namespace GooglesRival.Services
                 return null;
             }
         }
+
+        /// <summary>
+        /// Gets all messages.
+        /// </summary>
+        /// <returns>The Object.</returns>
+        public List<Message> GetAllMessages()
+        {
+            var messagesFromSource = this.dataSource.GetMessages();
+            return messagesFromSource;
+        }
     }
 }
