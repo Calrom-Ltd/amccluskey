@@ -9,6 +9,7 @@ import { MessageComponent } from './message/message.component';
 import { MessageDetailComponent } from './message-detail/message-detail.component';
 import { LoginComponent } from './login/login.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { AddUserComponent } from './add-user/add-user.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     MessageComponent,
     MessageDetailComponent,
     LoginComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    AddUserComponent
   ],
   imports: [
     HttpClientModule,
@@ -26,6 +28,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
       {path: 'login', component: LoginComponent},
       {path: 'message', component: MessageComponent},
       {path: 'user', component: UserComponent},
+      {path: 'addUser', component: AddUserComponent},
       {path: 'changePassword', component: ChangePasswordComponent},
       {path: 'messageDetail/:id', component: MessageDetailComponent}
     ]),

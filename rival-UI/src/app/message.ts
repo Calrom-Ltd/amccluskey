@@ -4,4 +4,5 @@ export interface Message {
     username: string;
     subject: string;
     body: string;
+    date: Date;
 }

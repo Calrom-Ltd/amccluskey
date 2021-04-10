@@ -1,7 +1,4 @@
-<a routerLink="/changePassword">
-    Change A Password
-</a>
-<h2>Users List</h2>
+<h1>Users List</h1>
   <table>
     <tr>
       <th>Username</th>
@@ -13,3 +10,4 @@
       <td>{{user.password}}</td>
     </tr>
   </table>
+  <button (click)="addUser()">Add New User</button>

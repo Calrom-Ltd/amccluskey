@@ -61,3 +61,13 @@ label {
     resize: vertical;
     margin-top: 5px;
   }
+  h1 {
+      color:#00A;
+      font-family: Arial, Helvetica, sans-serif;
+  }
+  span.errorMsg {
+    color: red;
+    font-weight: bold;
+    background-color: white;
+    display: block;
+  }

@@ -1,5 +1,5 @@
 import { User } from './user';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -11,9 +11,14 @@ export class UserService {
   private messageUrl = 'api/User/';
   constructor(private http: HttpClient) { }
 
+    httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+
     /** POST user */
-    postUser(username: string, password: string): Observable<boolean> {
-      return this.http.post<boolean>(this.messageUrl+"Login",{username, password})
+    postUser(username: string, password: string): Observable<any> {
+      return this.http.post<any>(this.messageUrl+"Login?username="+username+"&password="+password
+      ,{username, password}, this.httpOptions)
     }
 
     /** GET user */
@@ -27,9 +32,10 @@ export class UserService {
       +username+"&oldPassword="+password+"&newPassword="+newPassword+"&newPasswordConfirmation="+newPasswordConfirm)
     }
 
-    /** PUT change password */
+    /** PUT add new user */
     putAddNewUser(username: string, password: string): Observable<boolean> {
-      return this.http.put<boolean>(this.messageUrl+"AddNewUser",{username,password})
+      return this.http.put<boolean>(this.messageUrl+"AddNewUser?username="+username+"&password="+password
+      ,{username,password}, this.httpOptions);
     }
 }
 

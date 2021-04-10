@@ -1,10 +1,12 @@
 <h1>Message Detail</h1>
 
-<h2>ID</h2>
-{{message.id}}
-<h2>Username</h2>
-{{message.username}}
-<h2>Subject</h2>
-{{message.subject}}
-<h2>Body</h2>
-{{message.body}}
+<label class="msgDetail">ID</label>
+    <span>{{message.id}}</span><br>
+<label class="msgDetail">Date</label>
+    <span>{{message.date | date:'medium' }}</span><br>
+<label class="msgDetail">Username</label>
+    <span>{{message.username}}</span><br>
+<label class="msgDetail">Subject</label>
+    <span>{{message.subject}}</span><br>
+<label class="msgDetail">Body</label>
+    <span>{{message.body}}</span><br>
