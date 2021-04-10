@@ -75,6 +75,14 @@ namespace GooglesRival.Services
         }
 
         /// <summary>
+        /// Gets all messages.
+        /// </summary>
+        /// <returns>The Object.</returns>
+        public List<Message> GetAllMessages()
+        {
+            var messagesFromSource = this.dataSource.GetMessages();
+            return messagesFromSource;
+        }
         /// Gets from proxy asynchronous.
         /// </summary>
         /// <param name="uriToAccess">The URI to access.</param>

@@ -35,6 +35,13 @@
             <param name="id">The identifier.</param>
             <returns>The Object.</returns>
         </member>
+        <member name="M:GooglesRival.Controllers.MessageController.GetMessages">
+            <summary>
+            Gets the single message.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns>The Object.</returns>
+        </member>
         <member name="T:GooglesRival.Controllers.UserController">
             <summary>
             User Controller.
@@ -312,6 +319,12 @@
             <param name="username">The username.</param>
             <returns>The Object.</returns>
         </member>
+        <member name="M:GooglesRival.Services.IMessageService.GetAllMessages">
+            <summary>
+            Gets all messages.
+            </summary>
+            <returns>The Object.</returns>
+        </member>
         <member name="T:GooglesRival.Services.Iservices.IUsersService">
             <summary>
             The IUsersService Interface.
@@ -379,6 +392,12 @@
             <param name="id">The identifier.</param>
             <returns>The Message Object.</returns>
         </member>
+        <member name="M:GooglesRival.Services.MessageService.GetAllMessages">
+            <summary>
+            Gets all messages.
+            </summary>
+            <returns>The Object.</returns>
+      </member>
         <member name="M:GooglesRival.Services.MessageService.GetFromProxyAsync(System.Uri)">
             <summary>
             Gets from proxy asynchronous.
