@@ -6,6 +6,7 @@ namespace GooglesRival.Models
 {
     using MongoDB.Bson;
     using MongoDB.Bson.Serialization.Attributes;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// User Class.

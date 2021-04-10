@@ -5,6 +5,7 @@
 namespace GooglesRival.Controllers
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using GooglesRival.Models;
     using GooglesRival.Services.Iservices;
     using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,7 @@ namespace GooglesRival.Controllers
     /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
     [ApiController]
     [Route("[controller]")]
+    [ExcludeFromCodeCoverage]
     public class UserController : ControllerBase
     {
         private readonly IUsersService usersService;

@@ -6,6 +6,7 @@ namespace GooglesRival.DataSources
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using GooglesRival.Controllers;
     using GooglesRival.Models;
     using MongoDB.Driver;
@@ -35,6 +36,7 @@ namespace GooglesRival.DataSources
         /// The Object.
         /// </returns>
         /// <exception cref="NotImplementedException">Exception.</exception>
+        [ExcludeFromCodeCoverage]
         public bool AddUser(string username, string password)
         {
             User newUser = new User()
@@ -85,6 +87,7 @@ namespace GooglesRival.DataSources
         /// The Object.
         /// </returns>
         /// <exception cref="NotImplementedException">Exception.</exception>
+        [ExcludeFromCodeCoverage]
         public bool UpdateUser(string username, string password)
         {
             try

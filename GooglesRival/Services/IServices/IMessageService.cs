@@ -5,6 +5,7 @@
 namespace GooglesRival.Services
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using GooglesRival.Models;
 
     /// <summary>
@@ -17,7 +18,7 @@ namespace GooglesRival.Services
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>The Object.</returns>
-        Message GetMessageById(string id);
+        Task<Message> GetMessageById(string id);
 
         /// <summary>
         /// Gets the messages for user.
