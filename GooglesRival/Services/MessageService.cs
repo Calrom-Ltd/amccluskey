@@ -84,12 +84,11 @@ namespace GooglesRival.Services
             return messagesFromSource;
         }
 
+        /// <summary>
         /// Gets from proxy asynchronous.
         /// </summary>
         /// <param name="uriToAccess">The URI to access.</param>
-        /// <returns>
-        /// object.
-        /// </returns>
+        /// <returns>The Object.</returns>
         private static async Task<string> GetFromProxyAsync(Uri uriToAccess)
         {
             var httpClient = new HttpClient();
