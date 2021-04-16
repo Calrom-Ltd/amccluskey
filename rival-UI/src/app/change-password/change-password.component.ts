@@ -21,7 +21,7 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   ChangePassword(): void {    
-    this.userService.getChangePassword(this.username.nativeElement.value, this.oldPassword.nativeElement.value, 
+    this.userService.postChangePassword(this.username.nativeElement.value, this.oldPassword.nativeElement.value, 
       this.newPassword.nativeElement.value, this.newPasswordConfirmation.nativeElement.value)
       .subscribe(data => 
         {

@@ -1,13 +1,13 @@
-<h1>Messaging summary</h1>
-<p>Click a message ID to view the details</p>
+<h1>Messaging Summary</h1>
+<p>Click a message Id to view the details</p>
   <table>
     <tr>
-      <th>Message Id</th>
-      <th>Message Subject</th>
+      <th class="MsgId">Message Id</th>
+      <th class="MsgSubject">Message Subject</th>
     </tr>
     <tr *ngFor = "let message of messages">
-      <td>
+      <td class="MsgId">
         <a class="nav-item nav-link-edit" routerLink="/messageDetail/{{message.id}}">{{message.id}}</a></td>
-      <td>{{message.subject}}</td>
+      <td class="MsgSubject">{{message.subject}}</td>
     </tr>
   </table>

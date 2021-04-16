@@ -1,8 +1,8 @@
 <h1>Users List</h1>
   <table>
     <tr>
-      <th>Username</th>
-      <th>Password</th>
+      <th class="Username">Username</th>
+      <th class="Password">Password</th>
     </tr>
     <tr *ngFor = "let user of users">
       <td>
@@ -10,4 +10,4 @@
       <td>{{user.password}}</td>
     </tr>
   </table>
-  <button (click)="addUser()">Add New User</button>
+  <button id="AddUser" (click)="addUser()">Add New User</button>
