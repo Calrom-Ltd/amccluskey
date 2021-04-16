@@ -24,6 +24,17 @@ services:
         depends_on:
             - sqldata
         container_name: googles_rival_ContainerName
+    rivals-ui:
+        build:
+            context: ./rival-ui/
+            dockerfile: Dockerfile
+        image: calromamccluskey/traininggui
+        ports:
+            - 4200:801
+        depends_on:
+            - googlesrival
+            - sqldata
+        container_name: rivalUI
 networks:
     default:
         name: google_default
