@@ -54,13 +54,14 @@
             </summary>
             <param name="usersService">The users service.</param>
         </member>
-        <member name="M:GooglesRival.Controllers.UserController.Get(System.String,System.String)">
+        <member name="M:GooglesRival.Controllers.UserController.Get(GooglesRival.Models.User)">
             <summary>
             Gets the specified username.
             </summary>
-            <param name="username">The username.</param>
-            <param name="password">The password.</param>
-            <returns>The Object.</returns>
+            <param name="user">The user.</param>
+            <returns>
+            The Object.
+            </returns>
         </member>
         <member name="M:GooglesRival.Controllers.UserController.GetAll">
             <summary>
@@ -68,23 +69,23 @@
             </summary>
             <returns>The Object.</returns>
         </member>
-        <member name="M:GooglesRival.Controllers.UserController.ChangePassword(System.String,System.String,System.String,System.String)">
+        <member name="M:GooglesRival.Controllers.UserController.ChangePassword(GooglesRival.Models.ChangePassword)">
             <summary>
             Changes the password.
             </summary>
-            <param name="username">The username.</param>
-            <param name="oldPassword">The old password.</param>
-            <param name="newPassword">The new password.</param>
-            <param name="newPasswordConfirmation">The new password confirmation.</param>
-            <returns>The Object.</returns>
+            <param name="changePassword">The change password.</param>
+            <returns>
+            The Object.
+            </returns>
         </member>
-        <member name="M:GooglesRival.Controllers.UserController.AddNewUser(System.String,System.String)">
+        <member name="M:GooglesRival.Controllers.UserController.AddNewUser(GooglesRival.Models.User)">
             <summary>
             Adds the new user.
             </summary>
-            <param name="username">The username.</param>
-            <param name="password">The password.</param>
-            <returns>The Object.</returns>
+            <param name="user">The user.</param>
+            <returns>
+            The Object.
+            </returns>
         </member>
         <member name="T:GooglesRival.Controllers.IDataSource">
             <summary>
@@ -215,6 +216,43 @@
             The Object.
             </returns>
             <exception cref="T:System.NotImplementedException">Exception.</exception>
+        </member>
+        <member name="T:GooglesRival.Models.ChangePassword">
+            <summary>
+            User Class.
+            </summary>
+        </member>
+        <member name="P:GooglesRival.Models.ChangePassword.Username">
+            <summary>
+            Gets or sets the username.
+            </summary>
+            <value>
+            The username.
+            </value>
+        </member>
+        <member name="P:GooglesRival.Models.ChangePassword.OldPassword">
+            <summary>
+            Gets or sets the password.
+            </summary>
+            <value>
+            The password.
+            </value>
+        </member>
+        <member name="P:GooglesRival.Models.ChangePassword.NewPassword">
+            <summary>
+            Gets or sets new password.
+            </summary>
+            <value>
+            The new password.
+            </value>
+        </member>
+        <member name="P:GooglesRival.Models.ChangePassword.NewPasswordConfirmation">
+            <summary>
+            Gets or sets new passwordconfirmation.
+            </summary>
+            <value>
+            The new password confirmation.
+            </value>
         </member>
         <member name="T:GooglesRival.Models.Message">
             <summary>
@@ -397,15 +435,13 @@
             Gets all messages.
             </summary>
             <returns>The Object.</returns>
-      </member>
+        </member>
         <member name="M:GooglesRival.Services.MessageService.GetFromProxyAsync(System.Uri)">
             <summary>
             Gets from proxy asynchronous.
             </summary>
             <param name="uriToAccess">The URI to access.</param>
-            <returns>
-            object.
-            </returns>
+            <returns>The Object.</returns>
         </member>
         <member name="M:GooglesRival.Services.MessageService.ConvertJsonToMessage(System.String)">
             <summary>
