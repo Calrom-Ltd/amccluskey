@@ -1,12 +1,12 @@
 <h1>Add A New User</h1>
-<div>
+<div id="Username">
     <label>Username: </label>
     <input #username placeholder="Enter Username Here" type="text">
 </div>
-<div>
+<div id="Password">
     <label >Password: </label>
     <input #password placeholder="Enter Password Here" type="password">
 </div>
 <label></label>
-<button (click)="addUser()">Create User</button>
+<button id="CreateUser" (click)="addUser()">Create User</button>
 <span class="errorMsg">{{notice}}</span>

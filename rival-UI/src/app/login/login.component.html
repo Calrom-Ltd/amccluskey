@@ -1,12 +1,12 @@
-<p></p>
-<div>
+<h1>Please Login To Continue</h1>
+<div id="Username">
     <label>Username: </label>
     <input #username placeholder="Enter Username Here" type="text">
 </div>
-<div>
+<div id="Password">
     <label >Password: </label>
     <input #password placeholder="Enter Password Here" type="password">
 </div>
 <label></label>
-<button (click)="Login()">Login</button>
+<button id="Login" (click)="Login()">Login</button>
 <span class="errorMsg">{{notice}}</span>

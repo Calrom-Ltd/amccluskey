@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { MessageService } from '../message.service';
 import { Message } from '../message';
 
@@ -11,7 +10,7 @@ import { Message } from '../message';
 export class MessageComponent implements OnInit {
   messages: Message[]=[]
 
-  constructor(private route: ActivatedRoute, private MessageService: MessageService) { }
+  constructor(private MessageService: MessageService) { }
 
   ngOnInit(): void {
     this.getMessages();

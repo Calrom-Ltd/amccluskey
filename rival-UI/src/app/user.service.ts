@@ -17,8 +17,7 @@ export class UserService {
 
     /** POST user */
     postUser(username: string, password: string): Observable<any> {
-      return this.http.post<any>(this.messageUrl+"Login?username="+username+"&password="+password
-      ,{username, password}, this.httpOptions)
+      return this.http.post<any>(this.messageUrl+"Login",{username, password}, this.httpOptions)
     }
 
     /** GET user */
@@ -26,15 +25,14 @@ export class UserService {
       return this.http.get<User[]>(this.messageUrl+"DisplayUsers")
     }
 
-    /** GET change password */
-    getChangePassword(username: string, password: string, newPassword: string, newPasswordConfirm: string): Observable<boolean> {
-      return this.http.get<boolean>(this.messageUrl+"ChangePassword?username="
-      +username+"&oldPassword="+password+"&newPassword="+newPassword+"&newPasswordConfirmation="+newPasswordConfirm)
+    /** POST change password */
+    postChangePassword(username: string, oldPassword: string, newPassword: string, newPasswordConfirmation: string): Observable<boolean> {
+      return this.http.post<boolean>(this.messageUrl+"ChangePassword", {username, oldPassword, newPassword, newPasswordConfirmation}, this.httpOptions)
     }
 
     /** PUT add new user */
     putAddNewUser(username: string, password: string): Observable<boolean> {
-      return this.http.put<boolean>(this.messageUrl+"AddNewUser?username="+username+"&password="+password
+      return this.http.put<boolean>(this.messageUrl+"AddNewUser"
       ,{username,password}, this.httpOptions);
     }
 }
