@@ -33,14 +33,15 @@ namespace GooglesRival.Controllers
         /// <summary>
         /// Gets the specified username.
         /// </summary>
-        /// <param name="username">The username.</param>
-        /// <param name="password">The password.</param>
-        /// <returns>The Object.</returns>
+        /// <param name="user">The user.</param>
+        /// <returns>
+        /// The Object.
+        /// </returns>
         [HttpPost]
         [Route("Login")]
-        public ActionResult<bool> Get(string username, string password)
+        public ActionResult<bool> Get([FromBody] User user)
         {
-            return this.Ok(this.usersService.VerifyUsernameAndPassword(username, password));
+            return this.Ok(this.usersService.VerifyUsernameAndPassword(user.Username, user.Password));
         }
 
         /// <summary>
@@ -57,34 +58,34 @@ namespace GooglesRival.Controllers
         /// <summary>
         /// Changes the password.
         /// </summary>
-        /// <param name="username">The username.</param>
-        /// <param name="oldPassword">The old password.</param>
-        /// <param name="newPassword">The new password.</param>
-        /// <param name="newPasswordConfirmation">The new password confirmation.</param>
-        /// <returns>The Object.</returns>
-        [HttpGet]
+        /// <param name="changePassword">The change password.</param>
+        /// <returns>
+        /// The Object.
+        /// </returns>
+        [HttpPost]
         [Route("ChangePassword")]
-        public ActionResult<bool> ChangePassword(string username, string oldPassword, string newPassword, string newPasswordConfirmation)
+        public ActionResult<bool> ChangePassword([FromBody] ChangePassword changePassword)
         {
-            if (newPassword != newPasswordConfirmation)
+            if (changePassword.NewPassword != changePassword.NewPasswordConfirmation)
             {
                 return this.StatusCode(500);
             }
 
-            return this.Ok(this.usersService.ChangePassword(username, oldPassword, newPassword));
+            return this.Ok(this.usersService.ChangePassword(changePassword.Username, changePassword.OldPassword, changePassword.NewPassword));
         }
 
         /// <summary>
         /// Adds the new user.
         /// </summary>
-        /// <param name="username">The username.</param>
-        /// <param name="password">The password.</param>
-        /// <returns>The Object.</returns>
+        /// <param name="user">The user.</param>
+        /// <returns>
+        /// The Object.
+        /// </returns>
         [HttpPut]
         [Route("AddNewUser")]
-        public ActionResult<bool> AddNewUser(string username, string password)
+        public ActionResult<bool> AddNewUser([FromBody] User user)
         {
-            return this.Ok(this.usersService.AddNewUser(username, password));
+            return this.Ok(this.usersService.AddNewUser(user.Username, user.Password));
         }
     }
 }
